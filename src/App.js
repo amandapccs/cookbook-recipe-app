@@ -1,7 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import FoodPage from './pages/FoodPage';
 import DrinkPage from './pages/DrinkPage';
@@ -21,7 +19,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (
-    <div className="meals">
+    <div>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />

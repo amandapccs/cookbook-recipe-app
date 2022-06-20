@@ -1,4 +1,4 @@
-/* .meals {
+.meals {
   align-items: center;
   background: #0fa36b;
   color: #464646;
@@ -15,11 +15,14 @@
   max-height: 80vh;
 }
 
-.login-div {
+.loginForm {
   display: flex;
   flex-direction: column;
 }
 
+.form-control {
+  margin: 5px;
+}
 
 /*
 #iceLeft {
@@ -35,7 +38,7 @@
 }
 */
 
-/* .meals > .logo {
+.meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
   font-family: Montserrat , sans-serif;
@@ -71,4 +74,4 @@
   100% {
     transform: rotate(-10deg);
   }
-} */
+}
