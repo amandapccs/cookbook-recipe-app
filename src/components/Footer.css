@@ -2,10 +2,10 @@
   display: flex;
   position: absolute;
   bottom: 0;
-  color: #FFF;
   background-color: gray;
+  color: #fff;
   width: 100%;
-  height: 60px;    
+  height: 60px;
   text-align: center;
   line-height: 50px;
   justify-content: space-between;
