@@ -36,12 +36,17 @@ export default function Login() {
     const { id, value } = target;
     if (id === 'email') {
       setEmail(value);
+      setButtonDisabled(true);
+      if (emailValidation() && passwordValidation()) {
+        setButtonDisabled(false);
+      }
     }
     if (id === 'password') {
       setPassword(value);
-    }
-    if (emailValidation() && passwordValidation()) {
-      setButtonDisabled(false);
+      setButtonDisabled(true);
+      if (emailValidation() && passwordValidation()) {
+        setButtonDisabled(false);
+      }
     }
   };
 
@@ -86,7 +91,6 @@ export default function Login() {
           value={ password }
           onChange={ changeInput }
         />
-
         <button
           data-testid="login-submit-btn"
           type="button"
