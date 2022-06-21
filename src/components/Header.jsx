@@ -16,7 +16,7 @@ export default function Header({ title }) {
       >
         <img src={ profileIcon } alt="Profile icon" data-testid="profile-top-btn" />
       </Link>
-      <h1 data-testid="page-title">{title}</h1>
+      <h2 data-testid="page-title">{title}</h2>
 
       { showSearchButton && (
         <button

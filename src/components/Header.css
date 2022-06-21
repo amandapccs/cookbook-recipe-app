@@ -1,6 +1,11 @@
 .header-container {
-  margin: 0;
-  position: absolute;
-  top: 0;
-  width: 360px;
+  align-items: center;
+  background-color: lightslategrey;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-container button {
+  background: none;
+  border: none;
 }
