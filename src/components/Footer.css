@@ -1,0 +1,12 @@
+.footerConteiner {
+  background-color: gray;
+  bottom: 0;
+  color: white;
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+  line-height: 50px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
