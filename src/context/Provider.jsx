@@ -5,8 +5,13 @@ export const Context = createContext();
 
 export default function Provider({ children }) {
   const [showSearchButton, setShowSearchButton] = useState(true);
+  const [fetchedFoodOrDrink, setFetchedFoodOrDrink] = useState([]);
 
-  const contextValue = { showSearchButton, setShowSearchButton };
+  const contextValue = {
+    showSearchButton,
+    fetchedFoodOrDrink,
+    setShowSearchButton,
+    setFetchedFoodOrDrink };
 
   return (
     <Context.Provider value={ contextValue }>
