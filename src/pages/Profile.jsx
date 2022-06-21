@@ -5,6 +5,7 @@ import { Context } from '../context/Provider';
 
 export default function Profile() {
   const { setShowSearchButton } = useContext(Context);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setShowSearchButton(false), []);
   return (
     <div>

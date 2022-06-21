@@ -5,8 +5,14 @@ export const Context = createContext();
 
 export default function Provider({ children }) {
   const [showSearchButton, setShowSearchButton] = useState(true);
+  const [data, setData] = useState([]);
 
-  const contextValue = { showSearchButton, setShowSearchButton };
+  const contextValue = {
+    showSearchButton,
+    setShowSearchButton,
+    data,
+    setData,
+  };
 
   return (
     <Context.Provider value={ contextValue }>

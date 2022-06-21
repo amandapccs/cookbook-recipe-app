@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Context } from '../context/Provider';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import './Header.css';
 
 export default function Header({ title }) {
   const { showSearchButton } = useContext(Context);
