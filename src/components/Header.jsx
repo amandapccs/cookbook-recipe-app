@@ -1,27 +1,38 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Context } from '../context/Provider';
+import profileIcon from '../images/profileIcon.svg';
+import searchIcon from '../images/searchIcon.svg';
+import './Header.css';
 
 export default function Header({ title }) {
+  const { showSearchButton } = useContext(Context);
+  const [showSearchInput, setShowSeachInput] = useState(false);
   return (
-    <div>
-      <button
-        type="button"
-        data-testid="profile-top-btn"
+    <div className="header-container">
+      <Link
+        to="/profile"
       >
-        Profile
-      </button>
-      <h1 data-testid="page-title">{title}</h1>
-      <button
-        type="button"
-        data-testid="search-top-btn"
-      >
-        Search
-      </button>
-      {/* <input
-        type="text"
-        placeholder="Search Input"
-        data-testid="search-input"
-      /> */}
+        <img src={ profileIcon } alt="Profile icon" data-testid="profile-top-btn" />
+      </Link>
+      <h2 data-testid="page-title">{title}</h2>
+
+      { showSearchButton && (
+        <button
+          type="button"
+          onClick={ () => setShowSeachInput(!showSearchInput) }
+        >
+          <img src={ searchIcon } alt="Search icon" data-testid="search-top-btn" />
+        </button>
+      )}
+      { showSearchInput && (
+        <input
+          type="text"
+          placeholder="Search Input"
+          data-testid="search-input"
+        />
+      )}
     </div>
   );
 }
