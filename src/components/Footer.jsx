@@ -1,5 +1,6 @@
 import React from 'react';
 import './Footer.css';
+import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
@@ -13,7 +14,7 @@ export default function Footer() {
         className="footerConteiner"
       >
         <Link
-          to=""
+          to="/drinks"
         >
           <img
             src={ drinkIcon }
@@ -21,16 +22,24 @@ export default function Footer() {
             data-testid="drinks-bottom-btn"
           />
         </Link>
-        <div
-          data-testid="explore-bottom-btn"
+        <Link
+          to="/explore"
         >
-          <img src={ exploreIcon } alt="exploreIcon" />
-        </div>
-        <div
-          data-testid="food-bottom-btn"
+          <img
+            src={ exploreIcon }
+            alt="exploreIcon"
+            data-testid="explore-bottom-btn"
+          />
+        </Link>
+        <Link
+          to="/foods"
         >
-          <img src={ mealIcon } alt="mealIcon" />
-        </div>
+          <img
+            src={ mealIcon }
+            alt="mealIcon"
+            data-testid="food-bottom-btn"
+          />
+        </Link>
       </div>
     </footer>
   );
