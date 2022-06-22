@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 45px;
+}
+
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 3px;
+  display: flex;
+  height: 200px;
+  margin: 5px;
+  overflow: hidden;
+  text-align: center;
+  width: 100vw;
+}
+.card-image {
+  width: 70%;
+  height: 150px;
+}
+
+.footerConteiner {
+  background-color: gray;
+  bottom: 0;
+  color: white;
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+  line-height: 50px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
