@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Card from '../components/MainCard';
+import { getDoneRecipes, getInProgressRecipes } from '../helpers/LocalStorage';
+
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
+import './Details.css';
 
 export default function FoodDetails() {
   const { id } = useParams();
@@ -39,8 +42,54 @@ export default function FoodDetails() {
 
   const MAX_RECOMMENDATION = 6;
 
+  const buttonStart = () => {
+    if (JSON.parse(getDoneRecipes()) !== []) {
+      const finished = JSON.parse(getDoneRecipes())
+        .some((donerecipe) => donerecipe.id === id);
+      if (!finished) {
+        const progress = JSON.parse(getInProgressRecipes()).meals;
+        const AAAAA = Object.keys(progress)
+          .some((progressrecipe) => progressrecipe === id);
+        if (AAAAA) {
+          return (
+            <button
+              data-testid="start-recipe-btn"
+              className="btn-details btn btn-danger"
+              type="button"
+              // onClick={ () => { history.push('/settings'); } }
+              value="Continue Recipe"
+            >
+              Continue Recipe
+            </button>
+          );
+        }
+        return (<input
+          data-testid="start-recipe-btn"
+          className="btn-details btn btn-danger"
+          type="button"
+          // onClick={ () => { history.push('/settings'); } }
+          value="Start Recipe"
+        />);
+
+        //     const progress = JSON.parse(getInProgressRecipes()).some((recipe) => );
+        //     const ingredients = Object.values(Object.fromEntries(Object.entries(data)
+        // .filter(([key, value]) => key.includes('strIngredient')
+        // && value !== '' && value !== null)));
+        //     return (<input
+        //       data-testid="start-recipe-btn"
+        //       className="btn-details btn btn-danger"
+        //       type="button"
+        //       // onClick={ () => { history.push('/settings'); } }
+        //       value="Start Recipe"
+        //     />);
+      }
+    }
+  };
+
+  console.log(getInProgressRecipes());
+
   return (
-    <div>
+    <div className="details">
       <h1>Food Details</h1>
       <img
         data-testid="recipe-photo"
@@ -103,15 +152,10 @@ export default function FoodDetails() {
             />
           </div>
         ))}
-      <button
-        data-testid="start-recipe-btn"
-        type="button"
-        // className="btn btn-danger form-control"
-        // onClick={ onClickButton }
-        // disabled={ buttonDisabled }
-      >
-        Start Recipe
-      </button>
+      <div className="btn-div">
+        {buttonStart()}
+      </div>
+
     </div>
   );
 }
