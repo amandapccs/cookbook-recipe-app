@@ -46,3 +46,13 @@ code {
   text-align: center;
   width: 100%;
 }
+
+.in-progress-checkboxs {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.in-progress-checkboxs label {
+  margin: 0 5px;
+}
