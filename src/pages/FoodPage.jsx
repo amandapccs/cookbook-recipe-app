@@ -6,7 +6,7 @@ import { fetchApi } from '../helpers/API';
 import { Context as RecipeContext } from '../context/Provider';
 
 function FoodPage() {
-  const { data, setData } = useContext(RecipeContext);
+  const { data, setData, fetchedFoodOrDrink } = useContext(RecipeContext);
   const MAX_LIST = 12;
 
   async function inicialData() {
@@ -19,13 +19,49 @@ function FoodPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    console.log(fetchedFoodOrDrink);
+  }, [fetchedFoodOrDrink]);
+
   return (
     <div>
       <Header title="Foods" />
       <div
         className="card-container"
       >
-        {data.slice(0, MAX_LIST).map(({ idMeal, strMeal, strMealThumb }, index) => (
+
+        { fetchedFoodOrDrink.lenght !== 0
+          ? (
+            <>
+              {data.slice(0, MAX_LIST).map(({ idMeal, strMeal, strMealThumb }, index) => (
+                <Card
+                  key={ idMeal }
+                  src={ strMealThumb }
+                  name={ strMeal }
+                  dataTesteID={ index }
+                  id={ idMeal }
+                  path="comidas"
+                />
+              ))}
+
+            </>
+          )
+          : (
+            <>
+              {/*  {fetchedFoodOrDrink.map(({ idMeal, strMeal, strMealThumb }, index) => (
+                <Card
+                  key={ idMeal }
+                  src={ strMealThumb }
+                  name={ strMeal }
+                  dataTesteID={ index }
+                  id={ idMeal }
+                  path="comidas"
+                />
+              ))} */}
+              teste
+            </>) }
+
+        {/* {data.slice(0, MAX_LIST).map(({ idMeal, strMeal, strMealThumb }, index) => (
           <Card
             key={ idMeal }
             src={ strMealThumb }
@@ -34,7 +70,7 @@ function FoodPage() {
             id={ idMeal }
             path="comidas"
           />
-        ))}
+        ))} */}
 
       </div>
       <Footer />

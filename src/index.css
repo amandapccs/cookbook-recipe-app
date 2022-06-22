@@ -46,28 +46,3 @@ code {
   text-align: center;
   width: 100%;
 }
-
-.header-container {
-  align-items: center;
-  background-color: lightslategrey;
-  display: flex;
-  justify-content: space-between;
-}
-
-.header-container button {
-  background: none;
-  border: none;
-}
-
-.header-container {
-  align-items: center;
-  background-color: lightslategrey;
-  display: flex;
-  justify-content: space-between;
-}
-
-.header-container button {
-  background: none;
-  border: none;
-}
-

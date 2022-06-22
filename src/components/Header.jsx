@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../context/Provider';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import './Header.css';
 
 export default function Header({ title }) {
   const { showSearchButton, setFetchedFoodOrDrink,
@@ -88,7 +89,6 @@ export default function Header({ title }) {
   };
 
   useEffect(() => {
-    console.log(fetchedFoodOrDrink);
     if (fetchedFoodOrDrink.length === 1) {
       const findIdObject = fetchedFoodOrDrink
         .find((mealOrDrink) => mealOrDrink.idMeal || mealOrDrink.idDrink);
