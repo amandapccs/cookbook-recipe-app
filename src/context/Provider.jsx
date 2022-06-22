@@ -6,15 +6,12 @@ export const Context = createContext();
 export default function Provider({ children }) {
   const [showSearchButton, setShowSearchButton] = useState(true);
   const [fetchedFoodOrDrink, setFetchedFoodOrDrink] = useState([]);
-  const [data, setData] = useState([]);
 
   const contextValue = {
     showSearchButton,
     setShowSearchButton,
     fetchedFoodOrDrink,
     setFetchedFoodOrDrink,
-    data,
-    setData,
   };
 
   return (
