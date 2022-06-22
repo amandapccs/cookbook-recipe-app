@@ -1,7 +1,6 @@
 .header-container {
   align-items: center;
-  background-color: #E5E5E5;
-  display: flex;
+  background-color: #e5e5e5;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -21,7 +20,7 @@
 .search-input {
   border: 1px solid black;
   border-radius: 5px;
-  margin: 10px 0px 10px 0px;
+  margin: 10px 0;
   width: 350px;
 }
 

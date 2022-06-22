@@ -89,7 +89,6 @@ export default function Header({ title }) {
   };
 
   useEffect(() => {
-    console.log(fetchedFoodOrDrink);
     if (fetchedFoodOrDrink.length === 1) {
       const findIdObject = fetchedFoodOrDrink
         .find((mealOrDrink) => mealOrDrink.idMeal || mealOrDrink.idDrink);

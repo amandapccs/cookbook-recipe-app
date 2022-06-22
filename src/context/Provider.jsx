@@ -9,9 +9,10 @@ export default function Provider({ children }) {
 
   const contextValue = {
     showSearchButton,
-    fetchedFoodOrDrink,
     setShowSearchButton,
-    setFetchedFoodOrDrink };
+    fetchedFoodOrDrink,
+    setFetchedFoodOrDrink,
+  };
 
   return (
     <Context.Provider value={ contextValue }>
