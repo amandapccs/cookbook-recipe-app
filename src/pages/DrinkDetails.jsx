@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Card from '../components/MainCard';
+import { getDoneRecipes } from '../helpers/LocalStorage';
+
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
+import './Details.css';
 
 export default function DrinksDetails() {
   const { id } = useParams();
@@ -35,8 +38,23 @@ export default function DrinksDetails() {
 
   const MAX_RECOMMENDATION = 6;
 
+  const buttonStart = () => {
+    if (JSON.parse(getDoneRecipes()) !== []) {
+      const finished = JSON.parse(getDoneRecipes()).some((recipe) => recipe.id === id);
+      if (!finished) {
+        return (<input
+          data-testid="start-recipe-btn"
+          className="btn-details btn btn-danger"
+          type="button"
+          // onClick={ () => { history.push('/settings'); } }
+          value="Start Recipe"
+        />);
+      }
+    }
+  };
+
   return (
-    <div>
+    <div className="details">
       <h1>Drink Details</h1>
       <img
         data-testid="recipe-photo"
@@ -86,12 +104,8 @@ export default function DrinksDetails() {
             />
           </div>
         ))}
-      <button
-        data-testid="start-recipe-btn"
-        type="button"
-      >
-        Start Recipe
-      </button>
+      {buttonStart()}
+
     </div>
   );
 }

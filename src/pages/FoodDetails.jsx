@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Card from '../components/MainCard';
+import { getDoneRecipes } from '../helpers/LocalStorage';
+
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
+import './Details.css';
 
 export default function FoodDetails() {
   const { id } = useParams();
@@ -39,8 +42,35 @@ export default function FoodDetails() {
 
   const MAX_RECOMMENDATION = 6;
 
+  // const getDoneRecipes = () => {
+  //   const doneLocal = localStorage.getItem('doneRecipes');
+  //   if (!doneLocal) {
+  //     const newDoneRecipe = { id: 0 };
+  //     const aff = { id: '00' };
+  //     localStorage.setItem('doneRecipes', JSON.stringify([newDoneRecipe, aff]));
+  //     return localStorage.getItem('doneRecipes');
+  //   }
+  //   return doneLocal;
+  // };
+  // console.log(getDoneRecipes());
+
+  const buttonStart = () => {
+    if (JSON.parse(getDoneRecipes()) !== []) {
+      const finished = JSON.parse(getDoneRecipes()).some((recipe) => recipe.id === id);
+      if (!finished) {
+        return (<input
+          data-testid="start-recipe-btn"
+          className="btn-details btn btn-danger"
+          type="button"
+          // onClick={ () => { history.push('/settings'); } }
+          value="Start Recipe"
+        />);
+      }
+    }
+  };
+
   return (
-    <div>
+    <div className="details">
       <h1>Food Details</h1>
       <img
         data-testid="recipe-photo"
@@ -103,15 +133,8 @@ export default function FoodDetails() {
             />
           </div>
         ))}
-      <button
-        data-testid="start-recipe-btn"
-        type="button"
-        // className="btn btn-danger form-control"
-        // onClick={ onClickButton }
-        // disabled={ buttonDisabled }
-      >
-        Start Recipe
-      </button>
+      {buttonStart()}
+
     </div>
   );
 }
