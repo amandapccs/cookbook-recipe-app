@@ -36,9 +36,9 @@ export default function DrinkPage() {
               key={ idDrink }
               src={ strDrinkThumb }
               name={ strDrink }
-              dataTesteID={ index }
+              indexID={ index }
               id={ idDrink }
-              path="bebidas"
+              path="drinks"
             />
           ))}
 

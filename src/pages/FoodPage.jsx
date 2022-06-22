@@ -35,9 +35,9 @@ function FoodPage() {
               key={ idMeal }
               src={ strMealThumb }
               name={ strMeal }
-              dataTesteID={ index }
+              indexID={ index }
               id={ idMeal }
-              path="comidas"
+              path="foods"
             />
           ))}
 
