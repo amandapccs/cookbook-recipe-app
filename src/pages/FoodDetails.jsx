@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Card from '../components/MainCard';
 import { getDoneRecipes, getInProgressRecipes } from '../helpers/LocalStorage';
@@ -10,6 +10,7 @@ import './Details.css';
 
 export default function FoodDetails() {
   const { id } = useParams();
+  const history = useHistory();
 
   const [foodDetails, setFoodDetails] = useState({});
   const [YTCode, setYTCode] = useState('/');
@@ -56,7 +57,7 @@ export default function FoodDetails() {
               data-testid="start-recipe-btn"
               className="btn-details btn btn-danger"
               type="button"
-              // onClick={ () => { history.push('/settings'); } }
+              onClick={ () => { history.push(`/foods/${id}/in-progress`); } }
               value="Continue Recipe"
             >
               Continue Recipe
@@ -67,21 +68,9 @@ export default function FoodDetails() {
           data-testid="start-recipe-btn"
           className="btn-details btn btn-danger"
           type="button"
-          // onClick={ () => { history.push('/settings'); } }
+          onClick={ () => { history.push(`/foods/${id}/in-progress`); } }
           value="Start Recipe"
         />);
-
-        //     const progress = JSON.parse(getInProgressRecipes()).some((recipe) => );
-        //     const ingredients = Object.values(Object.fromEntries(Object.entries(data)
-        // .filter(([key, value]) => key.includes('strIngredient')
-        // && value !== '' && value !== null)));
-        //     return (<input
-        //       data-testid="start-recipe-btn"
-        //       className="btn-details btn btn-danger"
-        //       type="button"
-        //       // onClick={ () => { history.push('/settings'); } }
-        //       value="Start Recipe"
-        //     />);
       }
     }
   };
