@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Card from '../components/MainCard';
-import { getDoneRecipes } from '../helpers/LocalStorage';
+import { getDoneRecipes, getInProgressRecipes } from '../helpers/LocalStorage';
 
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
@@ -42,22 +42,27 @@ export default function FoodDetails() {
 
   const MAX_RECOMMENDATION = 6;
 
-  // const getDoneRecipes = () => {
-  //   const doneLocal = localStorage.getItem('doneRecipes');
-  //   if (!doneLocal) {
-  //     const newDoneRecipe = { id: 0 };
-  //     const aff = { id: '00' };
-  //     localStorage.setItem('doneRecipes', JSON.stringify([newDoneRecipe, aff]));
-  //     return localStorage.getItem('doneRecipes');
-  //   }
-  //   return doneLocal;
-  // };
-  // console.log(getDoneRecipes());
-
   const buttonStart = () => {
     if (JSON.parse(getDoneRecipes()) !== []) {
-      const finished = JSON.parse(getDoneRecipes()).some((recipe) => recipe.id === id);
+      const finished = JSON.parse(getDoneRecipes())
+        .some((donerecipe) => donerecipe.id === id);
       if (!finished) {
+        const progress = JSON.parse(getInProgressRecipes()).meals;
+        const AAAAA = Object.keys(progress)
+          .some((progressrecipe) => progressrecipe === id);
+        if (AAAAA) {
+          return (
+            <button
+              data-testid="start-recipe-btn"
+              className="btn-details btn btn-danger"
+              type="button"
+              // onClick={ () => { history.push('/settings'); } }
+              value="Continue Recipe"
+            >
+              Continue Recipe
+            </button>
+          );
+        }
         return (<input
           data-testid="start-recipe-btn"
           className="btn-details btn btn-danger"
@@ -65,9 +70,23 @@ export default function FoodDetails() {
           // onClick={ () => { history.push('/settings'); } }
           value="Start Recipe"
         />);
+
+        //     const progress = JSON.parse(getInProgressRecipes()).some((recipe) => );
+        //     const ingredients = Object.values(Object.fromEntries(Object.entries(data)
+        // .filter(([key, value]) => key.includes('strIngredient')
+        // && value !== '' && value !== null)));
+        //     return (<input
+        //       data-testid="start-recipe-btn"
+        //       className="btn-details btn btn-danger"
+        //       type="button"
+        //       // onClick={ () => { history.push('/settings'); } }
+        //       value="Start Recipe"
+        //     />);
       }
     }
   };
+
+  console.log(getInProgressRecipes());
 
   return (
     <div className="details">
@@ -133,7 +152,9 @@ export default function FoodDetails() {
             />
           </div>
         ))}
-      {buttonStart()}
+      <div className="btn-div">
+        {buttonStart()}
+      </div>
 
     </div>
   );

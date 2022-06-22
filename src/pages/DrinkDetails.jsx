@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Card from '../components/MainCard';
-import { getDoneRecipes } from '../helpers/LocalStorage';
+import { getDoneRecipes, getInProgressRecipes } from '../helpers/LocalStorage';
 
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
@@ -40,8 +40,25 @@ export default function DrinksDetails() {
 
   const buttonStart = () => {
     if (JSON.parse(getDoneRecipes()) !== []) {
-      const finished = JSON.parse(getDoneRecipes()).some((recipe) => recipe.id === id);
+      const finished = JSON.parse(getDoneRecipes())
+        .some((donerecipe) => donerecipe.id === id);
       if (!finished) {
+        const progress = JSON.parse(getInProgressRecipes()).cocktails;
+        const AAAAA = Object.keys(progress)
+          .some((progressrecipe) => progressrecipe === id);
+        if (AAAAA) {
+          return (
+            <button
+              data-testid="start-recipe-btn"
+              className="btn-details btn btn-danger"
+              type="button"
+              // onClick={ () => { history.push('/settings'); } }
+              value="Continue Recipe"
+            >
+              Continue Recipe
+            </button>
+          );
+        }
         return (<input
           data-testid="start-recipe-btn"
           className="btn-details btn btn-danger"
@@ -104,7 +121,9 @@ export default function DrinksDetails() {
             />
           </div>
         ))}
-      {buttonStart()}
+      <div className="btn-div">
+        {buttonStart()}
+      </div>
 
     </div>
   );
