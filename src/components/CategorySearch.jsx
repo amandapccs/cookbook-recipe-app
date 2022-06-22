@@ -1,10 +1,19 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { fetchApiDrinksCategory, fetchApiFoodsCategory } from '../helpers/API';
 import { Context as RecipeContext } from '../context/Provider';
+import {
+  fetchApiDrinksCategory,
+  fetchApiFoodsCategory,
+  fetchFoodByCategory,
+  fetchDrinksByCategory,
+} from '../helpers/API';
 
 function CategorySearch({ curCategory }) {
-  const { category, setCategory } = useContext(RecipeContext);
+  const {
+    category,
+    setCategory,
+    setFetchedFoodOrDrink,
+  } = useContext(RecipeContext);
   const MAX_CATEGORY = 5;
 
   async function fetchCategory() {
@@ -22,7 +31,15 @@ function CategorySearch({ curCategory }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function handleClick() {}
+  async function handleClick({ target: { id } }) {
+    let resultApi = [];
+    if (curCategory === 'foods') {
+      resultApi = await fetchFoodByCategory(id);
+    } else {
+      resultApi = await fetchDrinksByCategory(id);
+    }
+    setFetchedFoodOrDrink(resultApi);
+  }
 
   return (
     <div>
@@ -34,7 +51,6 @@ function CategorySearch({ curCategory }) {
           data-testid={ `${eachCategory.strCategory}-category-filter` }
           key={ eachCategory.strCategory }
         >
-          teste
           {eachCategory.strCategory}
         </button>
       ))}

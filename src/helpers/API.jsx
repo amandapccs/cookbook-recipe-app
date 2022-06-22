@@ -20,3 +20,17 @@ export async function fetchApiDrinksCategory() {
   const returnDrinks = resolve.drinks;
   return returnDrinks;
 }
+export async function fetchFoodByCategory(categoryName) {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+  const response = await fetch(`${URL}${categoryName}`);
+  const resolve = await response.json();
+  const returnFoods = resolve.meals;
+  return returnFoods;
+}
+export async function fetchDrinksByCategory(categoryName) {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+  const response = await fetch(`${URL}${categoryName}`);
+  const resolve = await response.json();
+  const returnDrinks = resolve.drinks;
+  return returnDrinks;
+}
