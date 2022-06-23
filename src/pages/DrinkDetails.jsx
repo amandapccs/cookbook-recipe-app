@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Card from '../components/MainCard';
 import { getDoneRecipes, getInProgressRecipes } from '../helpers/LocalStorage';
@@ -10,6 +10,7 @@ import './Details.css';
 
 export default function DrinksDetails() {
   const { id } = useParams();
+  const history = useHistory();
 
   const [drinksDetails, setDrinksDetails] = useState({});
 
@@ -52,7 +53,7 @@ export default function DrinksDetails() {
               data-testid="start-recipe-btn"
               className="btn-details btn btn-danger"
               type="button"
-              // onClick={ () => { history.push('/settings'); } }
+              onClick={ () => { history.push(`/drinks/${id}/in-progress`); } }
               value="Continue Recipe"
             >
               Continue Recipe
@@ -63,7 +64,7 @@ export default function DrinksDetails() {
           data-testid="start-recipe-btn"
           className="btn-details btn btn-danger"
           type="button"
-          // onClick={ () => { history.push('/settings'); } }
+          onClick={ () => { history.push(`/drinks/${id}/in-progress`); } }
           value="Start Recipe"
         />);
       }
