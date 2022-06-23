@@ -11,7 +11,7 @@ function InProgressIngredients({ data }) {
   const [inProgressItems, setInProgressItems] = useState(
     JSON.parse(localStorage.getItem('inProgressRecipes'))[type][id] || [],
   );
-
+  console.log(inProgressItems);
   const onChange = (index) => {
     const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const newId = { ...local,
@@ -45,24 +45,25 @@ function InProgressIngredients({ data }) {
     && value && value !== ' ')));
 
   useEffect(() => {
-    const localStorageItem = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    setInProgressItems(localStorageItem[type][id]);
+    /* const localStorageItem = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    setInProgressItems(localStorageItem[type][id]); */
+    console.log(inProgressItems);
     const auxArray = measures.map((_, index) => {
       if (inProgressItems.includes(index)) return true;
       return false;
     });
     setIsChecked(auxArray);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data, inProgressItems]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const auxArray = measures.map((_, index) => {
       if (inProgressItems.includes(index)) return true;
       return false;
     });
     setIsChecked(auxArray);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inProgressItems]);
+  }, [inProgressItems]); */
 
   return (
     <div>
