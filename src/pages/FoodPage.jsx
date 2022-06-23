@@ -51,7 +51,7 @@ function FoodPage() {
         {renderCard.slice(0, MAX_LIST)
           .map(({ idMeal, strMeal, strMealThumb }, index) => (
             <Card
-              key={ idMeal }
+              key={ index }
               src={ strMealThumb }
               name={ strMeal }
               indexID={ index }

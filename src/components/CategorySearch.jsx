@@ -41,19 +41,30 @@ function CategorySearch({ curCategory }) {
     setCategoryFoodsOrDrinks(resultApi);
     if (selectedCategory === id || !selectedCategory) {
       setToggle(!toggle);
+      /* setSelectedCategory(''); */
     }
+    if (!toggle && selectedCategory !== id) setToggle(!toggle);
     setSelectedCategory(id);
   }
-
+  function handleAllClick() {
+    if (toggle) setToggle(!toggle);
+  }
   return (
     <div>
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => handleAllClick() }
+      >
+        All
+      </button>
       {category.map((eachCategory) => (
         <button
+          key={ eachCategory.strCategory }
           id={ eachCategory.strCategory }
           type="button"
           onClick={ (event) => handleClick(event) }
           data-testid={ `${eachCategory.strCategory}-category-filter` }
-          key={ eachCategory.strCategory }
         >
           {eachCategory.strCategory}
         </button>

@@ -51,7 +51,7 @@ export default function DrinkPage() {
         {renderCard.slice(0, MAX_LIST)
           .map(({ idDrink, strDrink, strDrinkThumb }, index) => (
             <Card
-              key={ idDrink }
+              key={ index }
               src={ strDrinkThumb }
               name={ strDrink }
               indexID={ index }
