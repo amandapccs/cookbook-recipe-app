@@ -100,7 +100,7 @@ export default function Header({ title }) {
         history.push(`/drinks/${findId[0]}`);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchedFoodOrDrink]);
 
   return (

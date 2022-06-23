@@ -8,18 +8,21 @@ import { Context as RecipeContext } from '../context/Provider';
 
 function FoodPage() {
   const [renderCard, setRenderCard] = useState([]);
+
   const {
     fetchedFoodOrDrink,
     setFetchedFoodOrDrink,
     toggle,
     categoryFoodsOrDrinks,
   } = useContext(RecipeContext);
+
   const MAX_LIST = 12;
 
   async function inicialData() {
     const resultApi = await fetchApi();
     setFetchedFoodOrDrink(resultApi.meals);
   }
+
   useEffect(() => {
     if (fetchedFoodOrDrink) {
       setRenderCard(fetchedFoodOrDrink);
@@ -33,13 +36,11 @@ function FoodPage() {
   }, []);
 
   useEffect(() => {
-    if (toggle) {
-      setRenderCard(categoryFoodsOrDrinks);
-    } else {
-      setRenderCard(fetchedFoodOrDrink);
-    }
+    if (toggle) setRenderCard(categoryFoodsOrDrinks);
+    else setRenderCard(fetchedFoodOrDrink);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryFoodsOrDrinks, toggle]);
+
   return (
     <div>
       <Header title="Foods" />

@@ -15,7 +15,7 @@ export async function fetchApiFoodsCategory() {
   return returnMeals;
 }
 export async function fetchApiDrinksCategory() {
-  const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
   const resolve = await response.json();
   const returnDrinks = resolve.drinks;
   return returnDrinks;

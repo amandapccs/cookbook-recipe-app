@@ -21,11 +21,8 @@ function CategorySearch({ curCategory }) {
 
   async function fetchCategory() {
     let resultApi = [];
-    if (curCategory === 'foods') {
-      resultApi = await fetchApiFoodsCategory();
-    } else {
-      resultApi = await fetchApiDrinksCategory();
-    }
+    if (curCategory === 'foods') resultApi = await fetchApiFoodsCategory();
+    else resultApi = await fetchApiDrinksCategory();
     setCategory(resultApi.slice(0, MAX_CATEGORY));
   }
 
@@ -42,7 +39,7 @@ function CategorySearch({ curCategory }) {
       resultApi = await fetchDrinksByCategory(id);
     }
     setCategoryFoodsOrDrinks(resultApi);
-    if (selectedCategory === id || selectedCategory === '') {
+    if (selectedCategory === id || !selectedCategory) {
       setToggle(!toggle);
     }
     setSelectedCategory(id);
