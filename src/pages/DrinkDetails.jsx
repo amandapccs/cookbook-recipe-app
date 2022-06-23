@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Card from '../components/MainCard';
+import { getDoneRecipes, getInProgressRecipes } from '../helpers/LocalStorage';
+
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
+import './Details.css';
 
 export default function DrinksDetails() {
   const { id } = useParams();
+  const history = useHistory();
 
   const [drinksDetails, setDrinksDetails] = useState({});
 
@@ -35,8 +39,40 @@ export default function DrinksDetails() {
 
   const MAX_RECOMMENDATION = 6;
 
+  const buttonStart = () => {
+    if (JSON.parse(getDoneRecipes()) !== []) {
+      const finished = JSON.parse(getDoneRecipes())
+        .some((donerecipe) => donerecipe.id === id);
+      if (!finished) {
+        const progress = JSON.parse(getInProgressRecipes()).cocktails;
+        const AAAAA = Object.keys(progress)
+          .some((progressrecipe) => progressrecipe === id);
+        if (AAAAA) {
+          return (
+            <button
+              data-testid="start-recipe-btn"
+              className="btn-details btn btn-danger"
+              type="button"
+              onClick={ () => { history.push(`/drinks/${id}/in-progress`); } }
+              value="Continue Recipe"
+            >
+              Continue Recipe
+            </button>
+          );
+        }
+        return (<input
+          data-testid="start-recipe-btn"
+          className="btn-details btn btn-danger"
+          type="button"
+          onClick={ () => { history.push(`/drinks/${id}/in-progress`); } }
+          value="Start Recipe"
+        />);
+      }
+    }
+  };
+
   return (
-    <div>
+    <div className="details">
       <h1>Drink Details</h1>
       <img
         data-testid="recipe-photo"
@@ -86,12 +122,10 @@ export default function DrinksDetails() {
             />
           </div>
         ))}
-      <button
-        data-testid="start-recipe-btn"
-        type="button"
-      >
-        Start Recipe
-      </button>
+      <div className="btn-div">
+        {buttonStart()}
+      </div>
+
     </div>
   );
 }

@@ -1,0 +1,16 @@
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-details {
+  bottom: 0;
+  display: flex;
+  position: fixed;
+  text-align: center;
+}
