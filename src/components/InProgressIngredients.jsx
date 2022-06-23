@@ -1,17 +1,46 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
 function InProgressIngredients({ data }) {
+  const { id } = useParams();
+  const history = useHistory();
+  const { pathname } = history.location;
+  const type = pathname.includes('foods') ? 'meals' : 'cocktails';
+  const [inProgressItems, setInProgressItems] = useState(
+    JSON.parse(localStorage.getItem('inProgressRecipes'))[type][id] || [],
+  );
+
+  const onChange = (index) => {
+    const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const newId = { ...local,
+      [type]: { ...local[type], [id]: [index] } };
+
+    if (!local[type][id]) {
+      return localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
+    }
+
+    if (inProgressItems.includes(index)) {
+      const filteredItems = inProgressItems.filter((i) => i !== index);
+      setInProgressItems(filteredItems);
+      const newItems = { ...local,
+        [type]: { ...local[type], [id]: filteredItems } };
+      return localStorage.setItem('inProgressRecipes', JSON.stringify(newItems));
+    }
+
+    setInProgressItems([...inProgressItems, index]);
+    const newIngredient = { ...local,
+      [type]: { ...local[type], [id]: [...local[type][id], index] } };
+
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredient));
+  };
+
   const ingredients = Object.values(Object.fromEntries(Object.entries(data)
     .filter(([key, value]) => key.includes('strIngredient')
     && value)));
   const measures = Object.values(Object.fromEntries(Object.entries(data)
     .filter(([key, value]) => key.includes('strMeasure')
-    && value)));
-
-  // const handleChange = (index) => {
-  //   if (index === )
-  // }
+    && value && value !== ' ')));
 
   return (
     <div>
@@ -26,6 +55,8 @@ function InProgressIngredients({ data }) {
           >
             <input
               type="checkbox"
+              // checked -> state com index
+              onChange={ () => onChange(index) }
               id={ ingredients[index] }
             />
             {`${measure} - ${ingredients[index]}`}
