@@ -39,6 +39,15 @@ export default function DrinksDetails() {
 
   const MAX_RECOMMENDATION = 6;
 
+  function redirectToProgress() {
+    const type = 'cocktails';
+    const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const newId = { ...local,
+      [type]: { ...local[type], [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
+    history.push(`/drinks/${id}/in-progress`);
+  }
+
   const buttonStart = () => {
     if (JSON.parse(getDoneRecipes()) !== []) {
       const finished = JSON.parse(getDoneRecipes())
@@ -64,7 +73,7 @@ export default function DrinksDetails() {
           data-testid="start-recipe-btn"
           className="btn-details btn btn-danger"
           type="button"
-          onClick={ () => { history.push(`/drinks/${id}/in-progress`); } }
+          onClick={ redirectToProgress }
           value="Start Recipe"
         />);
       }

@@ -42,7 +42,14 @@ export default function FoodDetails() {
   }, []);
 
   const MAX_RECOMMENDATION = 6;
-
+  function redirectToProgress() {
+    const type = 'meals';
+    const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const newId = { ...local,
+      [type]: { ...local[type], [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
+    history.push(`/foods/${id}/in-progress`);
+  }
   const buttonStart = () => {
     if (JSON.parse(getDoneRecipes()) !== []) {
       const finished = JSON.parse(getDoneRecipes())
@@ -68,14 +75,12 @@ export default function FoodDetails() {
           data-testid="start-recipe-btn"
           className="btn-details btn btn-danger"
           type="button"
-          onClick={ () => { history.push(`/foods/${id}/in-progress`); } }
+          onClick={ redirectToProgress }
           value="Start Recipe"
         />);
       }
     }
   };
-
-  console.log(getInProgressRecipes());
 
   return (
     <div className="details">
