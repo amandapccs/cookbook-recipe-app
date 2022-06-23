@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Context as RecipeContext } from '../context/Provider';
 import {
@@ -12,8 +12,11 @@ function CategorySearch({ curCategory }) {
   const {
     category,
     setCategory,
-    setFetchedFoodOrDrink,
+    setCategoryFoodsOrDrinks,
+    setToggle,
+    toggle,
   } = useContext(RecipeContext);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const MAX_CATEGORY = 5;
 
   async function fetchCategory() {
@@ -38,7 +41,11 @@ function CategorySearch({ curCategory }) {
     } else {
       resultApi = await fetchDrinksByCategory(id);
     }
-    setFetchedFoodOrDrink(resultApi);
+    setCategoryFoodsOrDrinks(resultApi);
+    if (selectedCategory === id || selectedCategory === '') {
+      setToggle(!toggle);
+    }
+    setSelectedCategory(id);
   }
 
   return (
