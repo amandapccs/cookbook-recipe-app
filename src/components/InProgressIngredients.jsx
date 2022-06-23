@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 function InProgressIngredients({ data }) {
@@ -7,6 +7,7 @@ function InProgressIngredients({ data }) {
   const history = useHistory();
   const { pathname } = history.location;
   const type = pathname.includes('foods') ? 'meals' : 'cocktails';
+  const [isChecked, setIsChecked] = useState([]);
   const [inProgressItems, setInProgressItems] = useState(
     JSON.parse(localStorage.getItem('inProgressRecipes'))[type][id] || [],
   );
@@ -17,6 +18,7 @@ function InProgressIngredients({ data }) {
       [type]: { ...local[type], [id]: [index] } };
 
     if (!local[type][id]) {
+      setInProgressItems([index]);
       return localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
     }
 
@@ -42,6 +44,26 @@ function InProgressIngredients({ data }) {
     .filter(([key, value]) => key.includes('strMeasure')
     && value && value !== ' ')));
 
+  useEffect(() => {
+    const localStorageItem = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    setInProgressItems(localStorageItem[type][id]);
+    const auxArray = measures.map((_, index) => {
+      if (inProgressItems.includes(index)) return true;
+      return false;
+    });
+    setIsChecked(auxArray);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  useEffect(() => {
+    const auxArray = measures.map((_, index) => {
+      if (inProgressItems.includes(index)) return true;
+      return false;
+    });
+    setIsChecked(auxArray);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inProgressItems]);
+
   return (
     <div>
       { measures.map((measure, index) => (
@@ -55,7 +77,7 @@ function InProgressIngredients({ data }) {
           >
             <input
               type="checkbox"
-              // checked -> state com index
+              checked={ isChecked[index] }
               onChange={ () => onChange(index) }
               id={ ingredients[index] }
             />

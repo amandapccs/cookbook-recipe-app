@@ -75,8 +75,6 @@ export default function FoodDetails() {
     }
   };
 
-  console.log(getInProgressRecipes());
-
   return (
     <div className="details">
       <h1>Food Details</h1>

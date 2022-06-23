@@ -15,7 +15,6 @@ export default function FoodProgress() {
       const data = await response.json();
       const foodDetailsData = data.meals[0];
       setFoodDetails(foodDetailsData);
-      console.log(foodDetailsData);
     };
     fetchFoodDetails();
   // eslint-disable-next-line react-hooks/exhaustive-deps

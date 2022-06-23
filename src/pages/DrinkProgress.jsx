@@ -15,7 +15,6 @@ export default function DrinkProgress() {
       const data = await response.json();
       const drinksDetailsData = data.drinks[0];
       setDrinksDetails(drinksDetailsData);
-      console.log(drinksDetailsData);
     };
     fetchDrinksDetails();
   // eslint-disable-next-line react-hooks/exhaustive-deps
