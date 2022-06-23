@@ -1,15 +1,21 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Card from '../components/MainCard';
+import CategorySearch from '../components/CategorySearch';
 import { fetchApi } from '../helpers/API';
 import { Context as RecipeContext } from '../context/Provider';
 
 function FoodPage() {
+  const [renderCard, setRenderCard] = useState([]);
+
   const {
     fetchedFoodOrDrink,
     setFetchedFoodOrDrink,
+    toggle,
+    categoryFoodsOrDrinks,
   } = useContext(RecipeContext);
+
   const MAX_LIST = 12;
 
   async function inicialData() {
@@ -18,21 +24,34 @@ function FoodPage() {
   }
 
   useEffect(() => {
+    if (fetchedFoodOrDrink) {
+      setRenderCard(fetchedFoodOrDrink);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchedFoodOrDrink]);
+
+  useEffect(() => {
     inicialData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (toggle) setRenderCard(categoryFoodsOrDrinks);
+    else setRenderCard(fetchedFoodOrDrink);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryFoodsOrDrinks, toggle]);
+
   return (
     <div>
       <Header title="Foods" />
+      <CategorySearch curCategory="foods" />
       <div
         className="card-container"
       >
-
-        {fetchedFoodOrDrink.slice(0, MAX_LIST)
+        {renderCard.slice(0, MAX_LIST)
           .map(({ idMeal, strMeal, strMealThumb }, index) => (
             <Card
-              key={ idMeal }
+              key={ index }
               src={ strMealThumb }
               name={ strMeal }
               indexID={ index }
