@@ -6,8 +6,15 @@ import InProgressIngredients from '../components/InProgressIngredients';
 
 export default function DrinkProgress() {
   const { id } = useParams();
-
   const [drinksDetails, setDrinksDetails] = useState({});
+
+  if (!localStorage.getItem('inProgressRecipes')) {
+    const newProgressLocal = { cocktails: { 0: [] }, meals: { 0: [] } };
+    const type = 'cocktails';
+    const newId = { ...newProgressLocal,
+      [type]: { ...newProgressLocal[type], [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
+  }
 
   useEffect(() => {
     const fetchDrinksDetails = async () => {

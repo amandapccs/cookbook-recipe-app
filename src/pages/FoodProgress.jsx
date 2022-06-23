@@ -6,8 +6,15 @@ import InProgressIngredients from '../components/InProgressIngredients';
 
 export default function FoodProgress() {
   const { id } = useParams();
-
   const [foodDetails, setFoodDetails] = useState({});
+
+  if (!localStorage.getItem('inProgressRecipes')) {
+    const newProgressLocal = { cocktails: { 0: [] }, meals: { 0: [] } };
+    const type = 'meals';
+    const newId = { ...newProgressLocal,
+      [type]: { ...newProgressLocal[type], [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
+  }
 
   useEffect(() => {
     const fetchFoodDetails = async () => {
@@ -19,7 +26,6 @@ export default function FoodProgress() {
     fetchFoodDetails();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <div>
       <h1>Food in Progress</h1>
@@ -40,7 +46,6 @@ export default function FoodProgress() {
       >
         <img src={ favIcon } alt="Fav icon" data-testid="favorite-btn" />
       </button>
-
       <h1 data-testid="recipe-title">
         { foodDetails.strMeal }
       </h1>
@@ -53,7 +58,6 @@ export default function FoodProgress() {
       <p data-testid="instructions">
         { foodDetails.strInstructions }
       </p>
-
       <button
         data-testid="finish-recipe-btn"
         type="button"

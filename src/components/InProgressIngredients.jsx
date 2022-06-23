@@ -16,12 +16,10 @@ function InProgressIngredients({ data }) {
     const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const newId = { ...local,
       [type]: { ...local[type], [id]: [index] } };
-
     if (!local[type][id]) {
       setInProgressItems([index]);
       return localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
     }
-
     if (inProgressItems.includes(index)) {
       const filteredItems = inProgressItems.filter((i) => i !== index);
       setInProgressItems(filteredItems);
@@ -29,21 +27,17 @@ function InProgressIngredients({ data }) {
         [type]: { ...local[type], [id]: filteredItems } };
       return localStorage.setItem('inProgressRecipes', JSON.stringify(newItems));
     }
-
     setInProgressItems([...inProgressItems, index]);
     const newIngredient = { ...local,
       [type]: { ...local[type], [id]: [...local[type][id], index] } };
-
     localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredient));
   };
-
   const ingredients = Object.values(Object.fromEntries(Object.entries(data)
     .filter(([key, value]) => key.includes('strIngredient')
     && value)));
   const measures = Object.values(Object.fromEntries(Object.entries(data)
     .filter(([key, value]) => key.includes('strMeasure')
     && value && value !== ' ')));
-
   useEffect(() => {
     /* const localStorageItem = JSON.parse(localStorage.getItem('inProgressRecipes'));
     setInProgressItems(localStorageItem[type][id]); */
@@ -55,7 +49,6 @@ function InProgressIngredients({ data }) {
     setIsChecked(auxArray);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, inProgressItems]);
-
   /*  useEffect(() => {
     const auxArray = measures.map((_, index) => {
       if (inProgressItems.includes(index)) return true;
@@ -64,7 +57,6 @@ function InProgressIngredients({ data }) {
     setIsChecked(auxArray);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inProgressItems]); */
-
   return (
     <div>
       { measures.map((measure, index) => (
@@ -89,7 +81,6 @@ function InProgressIngredients({ data }) {
     </div>
   );
 }
-
 InProgressIngredients.propTypes = {
   data: PropTypes.string,
 }.isRequired;
