@@ -23,7 +23,7 @@ export default function Profile() {
       <Header title="Profile" />
       <main>
         <div data-testid="profile-email">
-          { readUser.email }
+          { readUser && readUser.email }
         </div>
         <form>
           <Link to="/done-recipes">
