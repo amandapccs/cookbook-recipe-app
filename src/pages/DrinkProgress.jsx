@@ -7,6 +7,7 @@ import InProgressIngredients from '../components/InProgressIngredients';
 export default function DrinkProgress() {
   const { id } = useParams();
   const [drinksDetails, setDrinksDetails] = useState({});
+  const [copied, setCopied] = useState(false);
 
   if (!localStorage.getItem('inProgressRecipes')) {
     const newProgressLocal = { cocktails: { 0: [] }, meals: { 0: [] } };
@@ -15,6 +16,12 @@ export default function DrinkProgress() {
       [type]: { ...newProgressLocal[type], [id]: [] } };
     localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
   }
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(`http://localhost:3000/drinks/${id}`)
+      .then(() => console.log('URL copied!'), () => console.log('Copy URL failed'));
+    setCopied(true);
+  };
 
   useEffect(() => {
     const fetchDrinksDetails = async () => {
@@ -39,16 +46,16 @@ export default function DrinkProgress() {
       />
       <button
         type="button"
+        onClick={ copyToClipboard }
       >
         <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
       </button>
       <button
         type="button"
-        // className="search-btn"
-        // onClick={ () => setShowSeachInput(!showSearchInput) }
       >
-        <img src={ favIcon } alt="Share icon" data-testid="favorite-btn" />
+        <img src={ favIcon } alt="Fav icon" data-testid="favorite-btn" />
       </button>
+      { copied && <span>Link copied!</span>}
       <h1 data-testid="recipe-title">
         { drinksDetails.strDrink }
       </h1>
