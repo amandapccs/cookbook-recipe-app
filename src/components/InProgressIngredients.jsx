@@ -34,12 +34,12 @@ function InProgressIngredients({ data }) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredient));
   };
 
-  // const ingredientKey = Object.keys(data).filter((key) => key.includes('strIngredient'));
-  // const ingredient = ingredientKey.map((item) => data[item]).filter((ingr) => ingr);
+  const ingredients = Object.keys(data).filter((key) => key.includes('strIngredient'))
+    .map((item) => data[item]).filter((ingr) => ingr);
 
-  const ingredients = Object.values(Object.fromEntries(Object.entries(data)
-    .filter(([key, value]) => key.includes('strIngredient')
-    && value)));
+  // const ingredients = Object.values(Object.fromEntries(Object.entries(data)
+  //   .filter(([key, value]) => key.includes('strIngredient')
+  //   && value)));
   const measures = Object.values(Object.fromEntries(Object.entries(data)
     .filter(([key, value]) => key.includes('strMeasure')
     && value && value !== ' ')));

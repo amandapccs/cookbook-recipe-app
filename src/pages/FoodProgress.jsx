@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
 import InProgressIngredients from '../components/InProgressIngredients';
-import copyToClipboard from '../helpers/copyToClipboard';
+// import copyToClipboard from '../helpers/copyToClipboard';
 
 export default function FoodProgress() {
   const { id } = useParams();
@@ -18,8 +18,9 @@ export default function FoodProgress() {
     localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
   }
 
-  const copyAndShowMessage = () => {
-    copyToClipboard();
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(`http://localhost:3000/foods/${id}`)
+      .then(() => console.log('URL copied!'), () => console.log('Copy URL failed'));
     setCopied(true);
   };
 
@@ -45,7 +46,7 @@ export default function FoodProgress() {
       />
       <button
         type="button"
-        onClick={ copyAndShowMessage }
+        onClick={ copyToClipboard }
       >
         <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
       </button>
