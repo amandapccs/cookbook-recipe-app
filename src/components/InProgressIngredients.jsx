@@ -1,14 +1,23 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { Context as RecipeContext } from '../context/Provider';
 
 function InProgressIngredients({ data }) {
+  const { setIsDisabled } = useContext(RecipeContext);
   const { id } = useParams();
   const history = useHistory();
   const { pathname } = history.location;
   const type = pathname.includes('foods') ? 'meals' : 'cocktails';
   const localStg = JSON.parse(localStorage.getItem('inProgressRecipes'))[type][id] || [];
   const [inProgressItems, setInProgressItems] = useState(localStg);
+
+  const ingredients = Object.keys(data).filter((key) => key.includes('strIngredient'))
+    .map((item) => data[item]).filter((ingr) => ingr);
+
+  const measures = Object.values(Object.fromEntries(Object.entries(data)
+    .filter(([key, value]) => key.includes('strMeasure')
+    && value && value !== ' ')));
 
   const onChange = (index) => {
     const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -34,15 +43,10 @@ function InProgressIngredients({ data }) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredient));
   };
 
-  const ingredients = Object.keys(data).filter((key) => key.includes('strIngredient'))
-    .map((item) => data[item]).filter((ingr) => ingr);
-
-  // const ingredients = Object.values(Object.fromEntries(Object.entries(data)
-  //   .filter(([key, value]) => key.includes('strIngredient')
-  //   && value)));
-  const measures = Object.values(Object.fromEntries(Object.entries(data)
-    .filter(([key, value]) => key.includes('strMeasure')
-    && value && value !== ' ')));
+  useEffect(() => {
+    if (localStg.length === ingredients.length) return setIsDisabled(false);
+    setIsDisabled(true);
+  }, [localStg]);
 
   return (
     <div>
