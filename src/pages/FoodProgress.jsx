@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
 import InProgressIngredients from '../components/InProgressIngredients';
+import copyToClipboard from '../helpers/copyToClipboard';
 
 export default function FoodProgress() {
   const { id } = useParams();
   const [foodDetails, setFoodDetails] = useState({});
+  const [copied, setCopied] = useState(false);
 
   if (!localStorage.getItem('inProgressRecipes')) {
     const newProgressLocal = { cocktails: { 0: [] }, meals: { 0: [] } };
@@ -15,6 +17,11 @@ export default function FoodProgress() {
       [type]: { ...newProgressLocal[type], [id]: [] } };
     localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
   }
+
+  const copyAndShowMessage = () => {
+    copyToClipboard();
+    setCopied(true);
+  };
 
   useEffect(() => {
     const fetchFoodDetails = async () => {
@@ -38,6 +45,7 @@ export default function FoodProgress() {
       />
       <button
         type="button"
+        onClick={ copyAndShowMessage }
       >
         <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
       </button>
@@ -46,6 +54,7 @@ export default function FoodProgress() {
       >
         <img src={ favIcon } alt="Fav icon" data-testid="favorite-btn" />
       </button>
+      { copied && <span>Link copied!</span>}
       <h1 data-testid="recipe-title">
         { foodDetails.strMeal }
       </h1>
