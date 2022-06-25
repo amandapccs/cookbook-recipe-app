@@ -1,12 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import InProgressIngredients from '../components/InProgressIngredients';
+import { Context as RecipeContext } from '../context/Provider';
 
 export default function DrinkProgress() {
+  const history = useHistory();
+  const { isDisabled } = useContext(RecipeContext);
   const { id } = useParams();
   const [drinksDetails, setDrinksDetails] = useState({});
+  const [copied, setCopied] = useState(false);
+  const local = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  const [favoriteIcon, setFavoriteIcon] = useState(local
+    .some((item) => item.id === id) ? blackHeartIcon : favIcon);
 
   if (!localStorage.getItem('inProgressRecipes')) {
     const newProgressLocal = { cocktails: { 0: [] }, meals: { 0: [] } };
@@ -15,6 +23,38 @@ export default function DrinkProgress() {
       [type]: { ...newProgressLocal[type], [id]: [] } };
     localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
   }
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(`http://localhost:3000/drinks/${id}`)
+      .then(() => console.log('URL copied!'), () => console.log('Copy URL failed'));
+    setCopied(true);
+  };
+
+  console.log(drinksDetails);
+
+  const handleFavoriteClick = () => {
+    const { strDrinkThumb, strCategory, strDrink, idDrink,
+      strAlcoholic } = drinksDetails;
+
+    const newFavRecipes = {
+      id: idDrink,
+      type: 'drink',
+      nationality: '',
+      category: strCategory || '',
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    };
+
+    if (local.some((drink) => drink.id === idDrink)) {
+      const filterDrink = local.filter((drink) => drink.id !== idDrink);
+      localStorage.setItem('favoriteRecipes', JSON.stringify([filterDrink]));
+      setFavoriteIcon(favIcon);
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...local, newFavRecipes]));
+      setFavoriteIcon(blackHeartIcon);
+    }
+  };
 
   useEffect(() => {
     const fetchDrinksDetails = async () => {
@@ -26,6 +66,32 @@ export default function DrinkProgress() {
     fetchDrinksDetails();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const finishRecipe = () => {
+    const { strDrinkThumb, strCategory, strDrink, idDrink,
+      strAlcoholic, strTags } = drinksDetails;
+
+    const data = new Date();
+    const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+
+    const doneRecipe = {
+      id: idDrink,
+      type: 'drink',
+      nationality: '',
+      category: strCategory || '',
+      alcoholicOrNot: strAlcoholic || '',
+      name: strDrink,
+      image: strDrinkThumb,
+      doneDate: data.toLocaleString('pt-BR', options),
+      tags: strTags || [],
+    };
+
+    if (!local.some((drink) => drink.id === idDrink)) {
+      localStorage.setItem('doneRecipes', JSON.stringify([...local, doneRecipe]));
+    }
+
+    history.push('/done-recipes');
+  };
 
   return (
     <div>
@@ -39,16 +105,17 @@ export default function DrinkProgress() {
       />
       <button
         type="button"
+        onClick={ copyToClipboard }
       >
         <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
       </button>
       <button
         type="button"
-        // className="search-btn"
-        // onClick={ () => setShowSeachInput(!showSearchInput) }
+        onClick={ handleFavoriteClick }
       >
-        <img src={ favIcon } alt="Share icon" data-testid="favorite-btn" />
+        <img src={ favoriteIcon } alt="Fav icon" data-testid="favorite-btn" />
       </button>
+      { copied && <span>Link copied!</span>}
       <h1 data-testid="recipe-title">
         { drinksDetails.strDrink }
       </h1>
@@ -65,6 +132,8 @@ export default function DrinkProgress() {
       <button
         data-testid="finish-recipe-btn"
         type="button"
+        disabled={ isDisabled }
+        onClick={ finishRecipe }
       >
         Finish Recipe
       </button>

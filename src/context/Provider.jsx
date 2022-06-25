@@ -6,14 +6,17 @@ export const Context = createContext();
 export default function Provider({ children }) {
   const [showSearchButton, setShowSearchButton] = useState(true);
   const [fetchedFoodOrDrink, setFetchedFoodOrDrink] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [category, setCategory] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [categoryFoodsOrDrinks, setCategoryFoodsOrDrinks] = useState([]);
 
   const contextValue = {
     showSearchButton,
-    setShowSearchButton,
     fetchedFoodOrDrink,
+    isDisabled,
+    setIsDisabled,
+    setShowSearchButton,
     setFetchedFoodOrDrink,
     category,
     setCategory,
