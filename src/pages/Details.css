@@ -1,7 +1,7 @@
-.details {
+/* .details {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .btn-div {
   display: flex;
@@ -13,4 +13,23 @@
   display: flex;
   position: fixed;
   text-align: center;
+}
+
+.recomendation-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.card-recomendation {
+  flex: none;
+  margin: 10px;
+  padding: 10px;
+  width: 180px;
+}
+
+.card-recomendation .card-image {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }

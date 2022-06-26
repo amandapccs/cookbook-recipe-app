@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
-import Card from '../components/MainCard';
+import Card from '../components/RecomendationCard';
 import Button from '../components/ButtonStartRecipe';
 import ShareAndFav from '../components/ButtonsShareAndFav';
 
@@ -86,21 +86,21 @@ export default function FoodDetails() {
         allowFullScreen
       />
       <h2>Recommended</h2>
-      {recommended.slice(0, MAX_RECOMMENDATION)
-        .map(({ idDrink, strDrink, strDrinkThumb }, index) => (
-          <div
-            key={ `${index}-recomendation-card` }
-            data-testid={ `${index}-recomendation-card` }
-          >
+      <div className="recomendation-container">
+        {recommended.slice(0, MAX_RECOMMENDATION)
+          .map(({ idDrink, strDrink, strDrinkThumb }, index) => (
             <Card
-              key={ idDrink }
+              key={ index }
               src={ strDrinkThumb }
               name={ strDrink }
+              testDiv={ `${index}-recomendation-card` }
+              testTitle={ `${index}-recomendation-title` }
+              testImg={ `${index}-card-img` }
               id={ idDrink }
               path="drinks"
             />
-          </div>
-        ))}
+          ))}
+      </div>
       <Button
         id={ id }
         type="meals"
