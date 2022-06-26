@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Card from '../components/MainCard';
-import { getDoneRecipes, getInProgressRecipes } from '../helpers/LocalStorage';
+import Button from '../components/ButtonStartRecipe';
+import ShareAndFav from '../components/ButtonsShareAndFav';
 
-import shareIcon from '../images/shareIcon.svg';
-import favIcon from '../images/whiteHeartIcon.svg';
 import './Details.css';
 
 export default function DrinksDetails() {
   const { id } = useParams();
-  const history = useHistory();
 
   const [drinksDetails, setDrinksDetails] = useState({});
 
@@ -39,47 +37,6 @@ export default function DrinksDetails() {
 
   const MAX_RECOMMENDATION = 6;
 
-  function redirectToProgress() {
-    const type = 'cocktails';
-    const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const newId = { ...local,
-      [type]: { ...local[type], [id]: [] } };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(newId));
-    history.push(`/drinks/${id}/in-progress`);
-  }
-
-  const buttonStart = () => {
-    if (JSON.parse(getDoneRecipes()) !== []) {
-      const finished = JSON.parse(getDoneRecipes())
-        .some((donerecipe) => donerecipe.id === id);
-      if (!finished) {
-        const progress = JSON.parse(getInProgressRecipes()).cocktails;
-        const AAAAA = Object.keys(progress)
-          .some((progressrecipe) => progressrecipe === id);
-        if (AAAAA) {
-          return (
-            <button
-              data-testid="start-recipe-btn"
-              className="btn-details btn btn-danger"
-              type="button"
-              onClick={ () => { history.push(`/drinks/${id}/in-progress`); } }
-              value="Continue Recipe"
-            >
-              Continue Recipe
-            </button>
-          );
-        }
-        return (<input
-          data-testid="start-recipe-btn"
-          className="btn-details btn btn-danger"
-          type="button"
-          onClick={ redirectToProgress }
-          value="Start Recipe"
-        />);
-      }
-    }
-  };
-
   return (
     <div className="details">
       <h1>Drink Details</h1>
@@ -90,18 +47,18 @@ export default function DrinksDetails() {
         src={ drinksDetails.strDrinkThumb }
         alt={ `${drinksDetails.strDrink}` }
       />
-      <button
-        type="button"
-      >
-        <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
-      </button>
-      <button
-        type="button"
-        // className="search-btn"
-        // onClick={ () => setShowSeachInput(!showSearchInput) }
-      >
-        <img src={ favIcon } alt="Share icon" data-testid="favorite-btn" />
-      </button>
+
+      <ShareAndFav
+        id={ id }
+        idType={ drinksDetails.idDrink }
+        image={ drinksDetails.strDrinkThumb }
+        category={ drinksDetails.strCategory }
+        area={ drinksDetails.strArea }
+        alcoholic={ drinksDetails.strAlcoholic }
+        name={ drinksDetails.strDrink }
+        type="drink"
+        page="drinks"
+      />
       <h1 data-testid="recipe-title">
         { drinksDetails.strDrink }
       </h1>
@@ -125,16 +82,16 @@ export default function DrinksDetails() {
               key={ idMeal }
               src={ strMealThumb }
               name={ strMeal }
-              dataTesteID={ index }
               id={ idMeal }
               path="foods"
             />
           </div>
         ))}
-      <div className="btn-div">
-        {buttonStart()}
-      </div>
-
+      <Button
+        id={ id }
+        type="cocktails"
+        page="drinks"
+      />
     </div>
   );
 }
