@@ -38,8 +38,7 @@ export default function DrinksDetails() {
   const MAX_RECOMMENDATION = 6;
 
   return (
-    <div className="details">
-      <h1>Drink Details</h1>
+    <div>
       <img
         data-testid="recipe-photo"
         width="360"
@@ -47,51 +46,56 @@ export default function DrinksDetails() {
         src={ drinksDetails.strDrinkThumb }
         alt={ `${drinksDetails.strDrink}` }
       />
-
-      <ShareAndFav
-        id={ id }
-        idType={ drinksDetails.idDrink }
-        image={ drinksDetails.strDrinkThumb }
-        category={ drinksDetails.strCategory }
-        area={ drinksDetails.strArea }
-        alcoholic={ drinksDetails.strAlcoholic }
-        name={ drinksDetails.strDrink }
-        type="drink"
-        page="drinks"
-      />
-      <h1 data-testid="recipe-title">
-        { drinksDetails.strDrink }
-      </h1>
-      <h3 data-testid="recipe-category">
-        { drinksDetails.strAlcoholic }
-      </h3>
-      <h2>Ingredients</h2>
-      <IngredientsCard data={ drinksDetails } />
-      <h2>Instructions</h2>
-      <p data-testid="instructions">
-        { drinksDetails.strInstructions }
-      </p>
-      <h2>Recommended</h2>
-      <div className="recomendation-container">
-        {recommended.slice(0, MAX_RECOMMENDATION)
-          .map(({ idMeal, strMeal, strMealThumb }, index) => (
-            <Card
-              key={ index }
-              src={ strMealThumb }
-              name={ strMeal }
-              testDiv={ `${index}-recomendation-card` }
-              testTitle={ `${index}-recomendation-title` }
-              testImg={ `${index}-card-img` }
-              id={ idMeal }
-              path="foods"
-            />
-          ))}
+      <div className="details">
+        <div className="details-header">
+          <h1 data-testid="recipe-title">
+            { drinksDetails.strDrink }
+          </h1>
+          <ShareAndFav
+            id={ id }
+            idType={ drinksDetails.idDrink }
+            image={ drinksDetails.strDrinkThumb }
+            category={ drinksDetails.strCategory }
+            area={ drinksDetails.strArea }
+            alcoholic={ drinksDetails.strAlcoholic }
+            name={ drinksDetails.strDrink }
+            type="drink"
+            page="drinks"
+          />
+        </div>
+        <h3 data-testid="recipe-category">
+          { drinksDetails.strAlcoholic }
+        </h3>
+        <h2>Ingredients</h2>
+        <IngredientsCard data={ drinksDetails } />
+        <h2>Instructions</h2>
+        <p data-testid="instructions">
+          { drinksDetails.strInstructions }
+        </p>
+        <h2>Recommended</h2>
+        <div className="recomendation-container">
+          {recommended.slice(0, MAX_RECOMMENDATION)
+            .map(({ idMeal, strMeal, strMealThumb, strCategory }, index) => (
+              <Card
+                key={ index }
+                src={ strMealThumb }
+                name={ strMeal }
+                testDiv={ `${index}-recomendation-card` }
+                testTitle={ `${index}-recomendation-title` }
+                testImg={ `${index}-card-img` }
+                id={ idMeal }
+                path="foods"
+                category={ strCategory }
+              />
+            ))}
+        </div>
+        <Button
+          id={ id }
+          type="cocktails"
+          page="drinks"
+        />
       </div>
-      <Button
-        id={ id }
-        type="cocktails"
-        page="drinks"
-      />
     </div>
+
   );
 }

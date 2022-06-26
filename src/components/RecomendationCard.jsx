@@ -2,23 +2,23 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Card({ src, name, id, path, testDiv, testTitle, testImg }) {
+function Card({ src, name, id, path, testDiv, testTitle, testImg, category }) {
   return (
-    <Link to={ `${path}/${id}` } className="card-recomendation" data-testid={ testDiv }>
+    <Link to={ `/${path}/${id}` } data-testid={ testDiv } className="card-recomendation">
       <img
         src={ src }
         alt={ name }
         data-testid={ testImg }
-        className="card-image"
+        className="image-recomendation"
       />
-      <h3
+      <h5>{ category }</h5>
+      <h4
         data-testid={ testTitle }
-        className="card-title"
       >
         { name }
-      </h3>
-
+      </h4>
     </Link>
+
   );
 }
 

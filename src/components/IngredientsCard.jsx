@@ -10,7 +10,7 @@ function IngredientsCard({ data }) {
     && value !== ' ' && value)));
 
   return (
-    <ul>
+    <ul className="ingredients-card">
       { measures.map((measure, index) => (
         <li
           key={ `${ingredients[index]} - ${index}}` }
