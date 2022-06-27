@@ -12,7 +12,7 @@ function CardDoneRecipes({
   doneDate,
   area,
   id,
-  /* tags, */
+  tags,
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -21,7 +21,7 @@ function CardDoneRecipes({
       .then(() => console.log('URL copied!'), () => console.log('Copy URL failed'));
     setCopied(true);
   };
-
+  console.log(tags);
   return (
     <div>
       <img
@@ -42,8 +42,8 @@ function CardDoneRecipes({
       <p data-testid={ `${index}-horizontal-done-date` }>
         {doneDate}
       </p>
-      {/* <div>
-        {tags.length > 0 && tags.map((tagName) => (
+      <div>
+        {tags && tags.map((tagName) => (
           <p
             data-testid={ `${index}-${tagName}-horizontal-tag` }
             key={ `${tagName}${index}` }
@@ -51,7 +51,7 @@ function CardDoneRecipes({
             {tagName}
           </p>
         ))}
-      </div> */}
+      </div>
       <button
         data-testid={ `${index}-horizontal-share-btn` }
         type="button"
@@ -77,7 +77,7 @@ CardDoneRecipes.defaultProps = {
   alcoholic: '',
   area: '',
   id: '',
-  /* tags: '', */
+  tags: [],
 };
 CardDoneRecipes.propTypes = {
   image: PropTypes.string,
@@ -89,5 +89,5 @@ CardDoneRecipes.propTypes = {
   doneDate: PropTypes.string,
   area: PropTypes.string,
   id: PropTypes.string,
-  /* tags: PropTypes.arrayOf(PropTypes.any), */
+  tags: PropTypes.arrayOf(PropTypes.any),
 };

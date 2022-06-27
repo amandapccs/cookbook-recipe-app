@@ -13,6 +13,7 @@ export default function FoodProgress() {
   const [foodDetails, setFoodDetails] = useState({});
   const [copied, setCopied] = useState(false);
   const local = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  const localDone = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   const [favoriteIcon, setFavoriteIcon] = useState(local
     .some((item) => item.id === id) ? blackHeartIcon : favIcon);
 
@@ -74,6 +75,9 @@ export default function FoodProgress() {
       strTags,
     } = foodDetails;
 
+    const comma = ',';
+    const splitedTags = strTags.split(comma);
+
     const data = new Date();
     const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
 
@@ -86,11 +90,11 @@ export default function FoodProgress() {
       name: strMeal,
       image: strMealThumb,
       doneDate: data.toLocaleString('pt-BR', options),
-      tags: strTags || [],
+      tags: splitedTags || [],
     };
 
-    if (!local.some((food) => food.id === idMeal)) {
-      localStorage.setItem('doneRecipes', JSON.stringify([...local, doneRecipe]));
+    if (!localDone.some((food) => food.id === idMeal)) {
+      localStorage.setItem('doneRecipes', JSON.stringify([...localDone, doneRecipe]));
     }
 
     history.push('/done-recipes');

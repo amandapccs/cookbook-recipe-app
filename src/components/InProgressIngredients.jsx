@@ -46,6 +46,7 @@ function InProgressIngredients({ data }) {
   useEffect(() => {
     if (localStg.length === ingredients.length) return setIsDisabled(false);
     setIsDisabled(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [localStg]);
 
   return (
