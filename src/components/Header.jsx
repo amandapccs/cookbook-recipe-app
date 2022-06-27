@@ -158,11 +158,11 @@ export default function Header({ title }) {
                 />
                 <span>Name</span>
               </label>
-              <label htmlFor="ingredient">
+              <label htmlFor="first-letter">
                 <input
                   type="radio"
                   name="search"
-                  id="ingredient"
+                  id="first-letter"
                   value="first-letter"
                   onClick={ ({ target }) => setSelectedRadioOption(target.value) }
                   data-testid="first-letter-search-radio"
