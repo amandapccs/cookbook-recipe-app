@@ -10,6 +10,7 @@ export default function DrinkPage() {
   const [renderCard, setRenderCard] = useState([]);
 
   const {
+    setShowSearchButton,
     fetchedFoodOrDrink,
     setFetchedFoodOrDrink,
     toggle,
@@ -35,6 +36,7 @@ export default function DrinkPage() {
   useEffect(() => {
     if (!exploreTrue) inicialData();
     setExploreTrue(false);
+    setShowSearchButton(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

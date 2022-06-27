@@ -13,6 +13,7 @@ export default function DrinkProgress() {
   const [drinksDetails, setDrinksDetails] = useState({});
   const [copied, setCopied] = useState(false);
   const local = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  const localDone = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   const [favoriteIcon, setFavoriteIcon] = useState(local
     .some((item) => item.id === id) ? blackHeartIcon : favIcon);
 
@@ -69,7 +70,10 @@ export default function DrinkProgress() {
 
   const finishRecipe = () => {
     const { strDrinkThumb, strCategory, strDrink, idDrink,
-      strAlcoholic, strTags } = drinksDetails;
+      strAlcoholic } = drinksDetails;
+
+    // const comma = ',';
+    // const splitedTags = strTags.split(comma);
 
     const data = new Date();
     const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
@@ -83,11 +87,11 @@ export default function DrinkProgress() {
       name: strDrink,
       image: strDrinkThumb,
       doneDate: data.toLocaleString('pt-BR', options),
-      tags: strTags || [],
+      tags: [],
     };
 
-    if (!local.some((drink) => drink.id === idDrink)) {
-      localStorage.setItem('doneRecipes', JSON.stringify([...local, doneRecipe]));
+    if (!localDone.some((drink) => drink.id === idDrink)) {
+      localStorage.setItem('doneRecipes', JSON.stringify([...localDone, doneRecipe]));
     }
 
     history.push('/done-recipes');

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function CardDoneRecipes({
+function CardFavRecipes({
   image,
   name,
   index,
@@ -12,17 +13,27 @@ function CardDoneRecipes({
   alcoholic,
   doneDate,
   area,
-  id,
   tags,
+  id,
+  setFilteredData,
 }) {
   const [copied, setCopied] = useState(false);
+  const local = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
       .then(() => console.log('URL copied!'), () => console.log('Copy URL failed'));
     setCopied(true);
   };
-  console.log(tags);
+
+  const handleFavoriteClick = () => {
+    if (local.some((recipe) => recipe.id === id)) {
+      const filterLocalStorage = local.filter((recipe) => recipe.id !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocalStorage));
+      setFilteredData(filterLocalStorage);
+    }
+  };
+
   return (
     <div>
       <Link to={ `/${type}s/${id}` }>
@@ -64,14 +75,25 @@ function CardDoneRecipes({
       >
         <img src={ shareIcon } alt="share" />
       </button>
+      <button
+        type="button"
+        className="btn-fav"
+        onClick={ handleFavoriteClick }
+      >
+        <img
+          src={ blackHeartIcon }
+          alt="Fav icon"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+        />
+      </button>
       { copied && <span>Link copied!</span>}
     </div>
   );
 }
 
-export default CardDoneRecipes;
+export default CardFavRecipes;
 
-CardDoneRecipes.defaultProps = {
+CardFavRecipes.defaultProps = {
   doneDate: '',
   category: '',
   image: '',
@@ -83,7 +105,7 @@ CardDoneRecipes.defaultProps = {
   id: '',
   tags: [],
 };
-CardDoneRecipes.propTypes = {
+CardFavRecipes.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
   index: PropTypes.number,
@@ -94,4 +116,5 @@ CardDoneRecipes.propTypes = {
   area: PropTypes.string,
   id: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.any),
+  setFilteredData: PropTypes.func.isRequired,
 };
