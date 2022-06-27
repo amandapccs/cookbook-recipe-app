@@ -14,6 +14,7 @@ function CardFavRecipes({
   area,
   tags,
   id,
+  setFavoriteRecipes,
 }) {
   const [copied, setCopied] = useState(false);
   const local = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -28,6 +29,7 @@ function CardFavRecipes({
     if (local.some((recipe) => recipe.id === id)) {
       const filterLocalStorage = local.filter((recipe) => recipe.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocalStorage));
+      setFavoriteRecipes(filterLocalStorage);
     }
   };
 
@@ -37,6 +39,7 @@ function CardFavRecipes({
         src={ image }
         alt={ name }
         data-testid={ `${index}-horizontal-image` }
+        className="recipe-done-image"
       />
       <h3 data-testid={ `${index}-horizontal-name` }>
         {name}
@@ -110,4 +113,5 @@ CardFavRecipes.propTypes = {
   area: PropTypes.string,
   id: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.any),
+  setFavoriteRecipes: PropTypes.func.isRequired,
 };

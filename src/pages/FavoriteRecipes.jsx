@@ -21,9 +21,8 @@ export default function FavoriteRecipes() {
   useEffect(() => {
     setShowSearchButton(false);
     getFavRecipesFromLocalStorage();
-    console.log('oi');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recipes]);
+  }, []);
   return (
     <div>
       <Header title="Favorite Recipes" />
@@ -52,6 +51,7 @@ export default function FavoriteRecipes() {
             area={ nationality }
             alcoholic={ alcoholicOrNot }
             id={ id }
+            setFavoriteRecipes={ setFavoriteRecipes }
           />),
       )}
     </div>
