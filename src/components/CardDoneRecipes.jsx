@@ -64,13 +64,6 @@ function CardDoneRecipes({
       >
         <img src={ shareIcon } alt="share" />
       </button>
-      <button
-        type="button"
-        className="btn-fav"
-        onClick={ handleFavoriteClick }
-      >
-        <img src={ favoriteIcon } alt="Fav icon" data-testid="favorite-btn" />
-      </button>
       { copied && <span>Link copied!</span>}
     </div>
   );

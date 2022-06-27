@@ -70,10 +70,10 @@ export default function DrinkProgress() {
 
   const finishRecipe = () => {
     const { strDrinkThumb, strCategory, strDrink, idDrink,
-      strAlcoholic, strTags } = drinksDetails;
+      strAlcoholic } = drinksDetails;
 
-    const comma = ',';
-    const splitedTags = strTags.split(comma);
+    // const comma = ',';
+    // const splitedTags = strTags.split(comma);
 
     const data = new Date();
     const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
@@ -87,7 +87,7 @@ export default function DrinkProgress() {
       name: strDrink,
       image: strDrinkThumb,
       doneDate: data.toLocaleString('pt-BR', options),
-      tags: splitedTags || [],
+      tags: [],
     };
 
     if (!localDone.some((drink) => drink.id === idDrink)) {
