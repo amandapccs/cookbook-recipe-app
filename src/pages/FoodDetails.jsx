@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
-import Card from '../components/MainCard';
+import Card from '../components/RecomendationCard';
 import Button from '../components/ButtonStartRecipe';
 import ShareAndFav from '../components/ButtonsShareAndFav';
 
@@ -43,8 +43,7 @@ export default function FoodDetails() {
   }, []);
 
   return (
-    <div className="details">
-      <h1>Food Details</h1>
+    <div>
       <img
         data-testid="recipe-photo"
         width="360"
@@ -52,60 +51,68 @@ export default function FoodDetails() {
         src={ foodDetails.strMealThumb }
         alt={ `${foodDetails.strMeal}` }
       />
+      <div className="details">
+        <div className="details-header">
+          <h1 data-testid="recipe-title">
+            { foodDetails.strMeal }
+          </h1>
+          <ShareAndFav
+            id={ id }
+            idType={ foodDetails.idMeal }
+            image={ foodDetails.strMealThumb }
+            category={ foodDetails.strCategory }
+            area={ foodDetails.strArea }
+            name={ foodDetails.strMeal }
+            type="food"
+            page="foods"
+          />
+        </div>
+        <h3 data-testid="recipe-category">
+          { foodDetails.strCategory }
+        </h3>
+        <h2>Ingredients</h2>
+        <IngredientsCard data={ foodDetails } />
+        <h2>Instructions</h2>
+        <p data-testid="instructions">
+          { foodDetails.strInstructions }
+        </p>
+        <h2>Video</h2>
+        <div className="video">
+          <iframe
+            data-testid="video"
+            width="340"
+            height="200"
+            src={ `https://www.youtube.com/embed/${YTCode}` }
+            title={ foodDetails.strMeal }
+            frameBorder="0"
+            allowFullScreen
+          />
+        </div>
 
-      <ShareAndFav
-        id={ id }
-        idType={ foodDetails.idMeal }
-        image={ foodDetails.strMealThumb }
-        category={ foodDetails.strCategory }
-        area={ foodDetails.strArea }
-        name={ foodDetails.strMeal }
-        type="food"
-        page="foods"
-      />
-      <h1 data-testid="recipe-title">
-        { foodDetails.strMeal }
-      </h1>
-      <h3 data-testid="recipe-category">
-        { foodDetails.strCategory }
-      </h3>
-      <h2>Ingredients</h2>
-      <IngredientsCard data={ foodDetails } />
-      <h2>Instructions</h2>
-      <p data-testid="instructions">
-        { foodDetails.strInstructions }
-      </p>
-      <h2>Video</h2>
-      <iframe
-        data-testid="video"
-        width="300"
-        height="200"
-        src={ `https://www.youtube.com/embed/${YTCode}` }
-        title={ foodDetails.strMeal }
-        frameBorder="0"
-        allowFullScreen
-      />
-      <h2>Recommended</h2>
-      {recommended.slice(0, MAX_RECOMMENDATION)
-        .map(({ idDrink, strDrink, strDrinkThumb }, index) => (
-          <div
-            key={ `${index}-recomendation-card` }
-            data-testid={ `${index}-recomendation-card` }
-          >
-            <Card
-              key={ idDrink }
-              src={ strDrinkThumb }
-              name={ strDrink }
-              id={ idDrink }
-              path="drinks"
-            />
-          </div>
-        ))}
-      <Button
-        id={ id }
-        type="meals"
-        page="foods"
-      />
+        <h2>Recommended</h2>
+        <div className="recomendation-container">
+          {recommended.slice(0, MAX_RECOMMENDATION)
+            .map(({ idDrink, strDrink, strDrinkThumb, strAlcoholic }, index) => (
+              <Card
+                key={ index }
+                src={ strDrinkThumb }
+                name={ strDrink }
+                testDiv={ `${index}-recomendation-card` }
+                testTitle={ `${index}-recomendation-title` }
+                testImg={ `${index}-card-img` }
+                id={ idDrink }
+                path="drinks"
+                category={ strAlcoholic }
+              />
+            ))}
+        </div>
+        <Button
+          id={ id }
+          type="meals"
+          page="foods"
+        />
+      </div>
     </div>
+
   );
 }

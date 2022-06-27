@@ -38,22 +38,23 @@ function ShareAndFav({ id, image, category, area, name, type, alcoholic, idType,
   };
 
   return (
-    <div className="btn-div">
+    <div className="btns-share-fav">
       <button
         type="button"
-        // className="search-btn"
+        className="btn-share"
         onClick={ copyToClipboard }
       >
         <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
       </button>
-      { copied && <span>Link copied!</span>}
       <button
         type="button"
-        // className="search-btn"
+        className="btn-fav"
         onClick={ handleFavoriteClick }
       >
         <img src={ favoriteIcon } alt="Fav icon" data-testid="favorite-btn" />
       </button>
+      <br />
+      { copied && <span>Link copied!</span>}
     </div>
   );
 }
