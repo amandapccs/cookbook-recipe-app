@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function CardDoneRecipes({
+function CardFavRecipes({
   image,
   name,
   index,
@@ -15,11 +16,19 @@ function CardDoneRecipes({
   id,
 }) {
   const [copied, setCopied] = useState(false);
+  const local = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/drinks/${id}`)
+    navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
       .then(() => console.log('URL copied!'), () => console.log('Copy URL failed'));
     setCopied(true);
+  };
+
+  const handleFavoriteClick = () => {
+    if (local.some((recipe) => recipe.id === id)) {
+      const filterLocalStorage = local.filter((recipe) => recipe.id !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocalStorage));
+    }
   };
 
   return (
@@ -33,7 +42,7 @@ function CardDoneRecipes({
         {name}
       </h3>
       <p data-testid={ `${index}-horizontal-top-text` }>
-        {type === 'comida' ? (
+        {type === 'food' ? (
           `${area} - ${category}`
         ) : (
           `${alcoholic}`
@@ -65,16 +74,20 @@ function CardDoneRecipes({
         className="btn-fav"
         onClick={ handleFavoriteClick }
       >
-        <img src={ favoriteIcon } alt="Fav icon" data-testid="favorite-btn" />
+        <img
+          src={ blackHeartIcon }
+          alt="Fav icon"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+        />
       </button>
       { copied && <span>Link copied!</span>}
     </div>
   );
 }
 
-export default CardDoneRecipes;
+export default CardFavRecipes;
 
-CardDoneRecipes.defaultProps = {
+CardFavRecipes.defaultProps = {
   doneDate: '',
   category: '',
   image: '',
@@ -86,7 +99,7 @@ CardDoneRecipes.defaultProps = {
   id: '',
   tags: [],
 };
-CardDoneRecipes.propTypes = {
+CardFavRecipes.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
   index: PropTypes.number,
