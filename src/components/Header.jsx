@@ -13,6 +13,7 @@ export default function Header({ title }) {
   const [showSearchInput, setShowSeachInput] = useState(false);
   const [selectedRadioOption, setSelectedRadioOption] = useState('');
   const [searchInputValue, setSearchInputValue] = useState('');
+  const FIRST_LETTER = 'first-letter';
   // const [fetchedResults, setFetchedResults] = useState();
   // const [fetchedFoodOrDrink, setFetchedFoodOrDrink] = useState([]);
 
@@ -46,10 +47,7 @@ export default function Header({ title }) {
     if (selectedRadioOption === 'name') {
       return nameEndpoint;
     }
-    if (selectedRadioOption === 'first-letter') {
-      if (searchInputValue.length > 1) {
-        return global.alert('Your search must have only 1 (one) character');
-      }
+    if (selectedRadioOption === FIRST_LETTER) {
       return firstLetterEndpoint;
     }
   };
@@ -61,6 +59,10 @@ export default function Header({ title }) {
   };
 
   const fetchMealOrDrink = () => {
+    if (selectedRadioOption === FIRST_LETTER && searchInputValue.length > 1) {
+      return global.alert('Your search must have only 1 (one) character');
+    }
+
     if (title === 'Foods') {
       const foodEndpoint = getFoodEndpoint();
       const fetchFoods = async () => {
