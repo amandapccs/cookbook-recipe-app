@@ -75,6 +75,9 @@ export default function FoodProgress() {
       strTags,
     } = foodDetails;
 
+    const comma = ',';
+    const splitedTags = strTags.split(comma);
+
     const data = new Date();
     const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
 
@@ -87,7 +90,7 @@ export default function FoodProgress() {
       name: strMeal,
       image: strMealThumb,
       doneDate: data.toLocaleString('pt-BR', options),
-      tags: strTags || [],
+      tags: splitedTags || [],
     };
 
     if (!localDone.some((food) => food.id === idMeal)) {

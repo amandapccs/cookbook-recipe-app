@@ -11,8 +11,8 @@ function CardDoneRecipes({
   alcoholic,
   doneDate,
   area,
-  tags,
   id,
+  tags,
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -21,7 +21,7 @@ function CardDoneRecipes({
       .then(() => console.log('URL copied!'), () => console.log('Copy URL failed'));
     setCopied(true);
   };
-
+  console.log(tags);
   return (
     <div>
       <img
