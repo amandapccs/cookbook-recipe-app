@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
@@ -24,16 +25,18 @@ function CardDoneRecipes({
   console.log(tags);
   return (
     <div>
-      <img
-        src={ image }
-        alt={ name }
-        data-testid={ `${index}-horizontal-image` }
-      />
-      <h3 data-testid={ `${index}-horizontal-name` }>
-        {name}
-      </h3>
+      <Link to={ `/${type}s/${id}` } className="link-favorite">
+        <img
+          src={ image }
+          alt={ name }
+          data-testid={ `${index}-horizontal-image` }
+        />
+        <h3 data-testid={ `${index}-horizontal-name` }>
+          {name}
+        </h3>
+      </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
-        {type === 'comida' ? (
+        {type === 'food' ? (
           `${area} - ${category}`
         ) : (
           `${alcoholic}`
