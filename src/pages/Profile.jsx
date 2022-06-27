@@ -17,7 +17,6 @@ export default function Profile() {
     localStorage.removeItem('favoriteRecipes');
     localStorage.removeItem('inProgressRecipes');
   };
-
   return (
     <div>
       <Header title="Profile" />
