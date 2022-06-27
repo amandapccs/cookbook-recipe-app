@@ -8,8 +8,8 @@ import { Context as RecipeContext } from '../context/Provider';
 
 function FoodPage() {
   const [renderCard, setRenderCard] = useState([]);
-
   const {
+    setShowSearchButton,
     fetchedFoodOrDrink,
     setFetchedFoodOrDrink,
     toggle,
@@ -31,6 +31,7 @@ function FoodPage() {
   }, [fetchedFoodOrDrink]);
 
   useEffect(() => {
+    setShowSearchButton(true);
     inicialData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

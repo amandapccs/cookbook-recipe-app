@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
@@ -17,23 +18,26 @@ function CardDoneRecipes({
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/drinks/${id}`)
+    navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
       .then(() => console.log('URL copied!'), () => console.log('Copy URL failed'));
     setCopied(true);
   };
   console.log(tags);
   return (
     <div>
-      <img
-        src={ image }
-        alt={ name }
-        data-testid={ `${index}-horizontal-image` }
-      />
-      <h3 data-testid={ `${index}-horizontal-name` }>
-        {name}
-      </h3>
+      <Link to={ `/${type}s/${id}` }>
+        <img
+          src={ image }
+          alt={ name }
+          data-testid={ `${index}-horizontal-image` }
+          className="recipe-done-image"
+        />
+        <h3 data-testid={ `${index}-horizontal-name` }>
+          {name}
+        </h3>
+      </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
-        {type === 'comida' ? (
+        {type === 'food' ? (
           `${area} - ${category}`
         ) : (
           `${alcoholic}`
