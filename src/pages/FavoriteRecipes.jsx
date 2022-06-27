@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { Context as RecipeContext } from '../context/Provider';
 import CardFavRecipes from '../components/CardFavRecipes';
-import FilterButtonsFav from '../components/FilterButtonsFav';
+// import FilterButtonsFav from '../components/FilterButtonsFav';
 
 export default function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [filteredData, setFilteredData] = useState(favoriteRecipes);
   const recipes = localStorage.getItem('favoriteRecipes');
-  /* const [filteredData, setFilteredData] = useState(doneRecipes); */
 
   const { setShowSearchButton } = useContext(RecipeContext);
 
@@ -15,7 +15,18 @@ export default function FavoriteRecipes() {
     const data = JSON.parse(recipes);
     if (data) {
       setFavoriteRecipes(data);
+      setFilteredData(data);
+    } else {
+      setFavoriteRecipes([]);
     }
+  }
+
+  function filterDataByType(type) {
+    if (type !== 'all') {
+      setFilteredData(favoriteRecipes.filter((value) => value.type === type));
+      return true;
+    }
+    setFilteredData(favoriteRecipes);
   }
 
   useEffect(() => {
@@ -26,8 +37,30 @@ export default function FavoriteRecipes() {
   return (
     <div>
       <Header title="Favorite Recipes" />
-      <FilterButtonsFav />
-      {favoriteRecipes.map(
+      <div>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => filterDataByType('all') }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ () => filterDataByType('food') }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => filterDataByType('drink') }
+        >
+          Drinks
+        </button>
+      </div>
+      {filteredData.map(
         ({
           image,
           name,
@@ -51,7 +84,7 @@ export default function FavoriteRecipes() {
             area={ nationality }
             alcoholic={ alcoholicOrNot }
             id={ id }
-            setFavoriteRecipes={ setFavoriteRecipes }
+            setFilteredData={ setFilteredData }
           />),
       )}
     </div>

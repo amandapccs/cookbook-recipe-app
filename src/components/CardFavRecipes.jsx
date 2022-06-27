@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
@@ -14,7 +15,7 @@ function CardFavRecipes({
   area,
   tags,
   id,
-  setFavoriteRecipes,
+  setFilteredData,
 }) {
   const [copied, setCopied] = useState(false);
   const local = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -29,21 +30,23 @@ function CardFavRecipes({
     if (local.some((recipe) => recipe.id === id)) {
       const filterLocalStorage = local.filter((recipe) => recipe.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocalStorage));
-      setFavoriteRecipes(filterLocalStorage);
+      setFilteredData(filterLocalStorage);
     }
   };
 
   return (
     <div>
-      <img
-        src={ image }
-        alt={ name }
-        data-testid={ `${index}-horizontal-image` }
-        className="recipe-done-image"
-      />
-      <h3 data-testid={ `${index}-horizontal-name` }>
-        {name}
-      </h3>
+      <Link to={ `/${type}s/${id}` }>
+        <img
+          src={ image }
+          alt={ name }
+          data-testid={ `${index}-horizontal-image` }
+          className="recipe-done-image"
+        />
+        <h3 data-testid={ `${index}-horizontal-name` }>
+          {name}
+        </h3>
+      </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
         {type === 'food' ? (
           `${area} - ${category}`
@@ -113,5 +116,5 @@ CardFavRecipes.propTypes = {
   area: PropTypes.string,
   id: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.any),
-  setFavoriteRecipes: PropTypes.func.isRequired,
+  setFilteredData: PropTypes.func.isRequired,
 };
