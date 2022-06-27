@@ -68,7 +68,7 @@ function DoneRecipes() {
           doneDate,
           tags,
           type,
-          area,
+          nationality,
           alcoholicOrNot,
           id,
         }, index) => (
@@ -81,7 +81,7 @@ function DoneRecipes() {
             tags={ tags }
             index={ index }
             type={ type }
-            area={ area }
+            area={ nationality }
             alcoholic={ alcoholicOrNot }
             id={ id }
           />),

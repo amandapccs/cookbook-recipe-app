@@ -18,18 +18,19 @@ function CardDoneRecipes({
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/drinks/${id}`)
+    navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
       .then(() => console.log('URL copied!'), () => console.log('Copy URL failed'));
     setCopied(true);
   };
   console.log(tags);
   return (
     <div>
-      <Link to={ `/${type}s/${id}` } className="link-favorite">
+      <Link to={ `/${type}s/${id}` }>
         <img
           src={ image }
           alt={ name }
           data-testid={ `${index}-horizontal-image` }
+          className="recipe-done-image"
         />
         <h3 data-testid={ `${index}-horizontal-name` }>
           {name}
