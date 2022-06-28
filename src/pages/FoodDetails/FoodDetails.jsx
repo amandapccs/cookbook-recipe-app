@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import IngredientsCard from '../components/IngredientsCard';
-import Card from '../components/RecomendationCard';
-import Button from '../components/ButtonStartRecipe';
-import ShareAndFav from '../components/ButtonsShareAndFav';
-
+import IngredientsCard from '../../components/IngredientsCard/IngredientsCard';
+import Card from '../../components/RecomendationCard';
+import Button from '../../components/ButtonStartRecipe';
+import ShareAndFav from '../../components/ButtonsShareAndFav';
 import './Details.css';
+import {
+  RecomendationConteiner,
+  MainConteiner,
+  FoodImg,
+  FoodTitle,
+  IngredientsTitle,
+  ShareAndFavContainer,
+  FoodInstructions,
+  InstructionsContainer,
+} from './styles';
 
 export default function FoodDetails() {
   const { id } = useParams();
-  // const history = useHistory();
 
   const [foodDetails, setFoodDetails] = useState({});
   const [YTCode, setYTCode] = useState('/');
-
   const youtubeCode = (data) => setYTCode(data.split('=')[1]);
 
   useEffect(() => {
@@ -30,7 +37,6 @@ export default function FoodDetails() {
   }, []);
 
   const [recommended, setRecommended] = useState([]);
-
   const MAX_RECOMMENDATION = 6;
 
   useEffect(() => {
@@ -43,39 +49,39 @@ export default function FoodDetails() {
   }, []);
 
   return (
-    <div>
-      <img
+    <MainConteiner>
+      <FoodTitle data-testid="recipe-title">
+        { foodDetails.strMeal }
+      </FoodTitle>
+      <FoodImg
         data-testid="recipe-photo"
         width="360"
         height="200"
         src={ foodDetails.strMealThumb }
         alt={ `${foodDetails.strMeal}` }
       />
-      <div className="details">
-        <div className="details-header">
-          <h1 data-testid="recipe-title">
-            { foodDetails.strMeal }
-          </h1>
-          <ShareAndFav
-            id={ id }
-            idType={ foodDetails.idMeal }
-            image={ foodDetails.strMealThumb }
-            category={ foodDetails.strCategory }
-            area={ foodDetails.strArea }
-            name={ foodDetails.strMeal }
-            type="food"
-            page="foods"
-          />
-        </div>
-        <h3 data-testid="recipe-category">
-          { foodDetails.strCategory }
-        </h3>
-        <h2>Ingredients</h2>
-        <IngredientsCard data={ foodDetails } />
-        <h2>Instructions</h2>
-        <p data-testid="instructions">
+      <ShareAndFavContainer className="details-header">
+        <ShareAndFav
+          id={ id }
+          idType={ foodDetails.idMeal }
+          image={ foodDetails.strMealThumb }
+          category={ foodDetails.strCategory }
+          area={ foodDetails.strArea }
+          name={ foodDetails.strMeal }
+          type="food"
+          page="foods"
+        />
+      </ShareAndFavContainer>
+      <IngredientsTitle>Ingredients</IngredientsTitle>
+      <IngredientsCard data={ foodDetails } />
+      <IngredientsTitle>Instructions</IngredientsTitle>
+      <InstructionsContainer>
+        <FoodInstructions>
           { foodDetails.strInstructions }
-        </p>
+        </FoodInstructions>
+
+      </InstructionsContainer>
+      <div className="details">
         <h2>Video</h2>
         <div className="video">
           <iframe
@@ -90,7 +96,7 @@ export default function FoodDetails() {
         </div>
 
         <h2>Recommended</h2>
-        <div className="recomendation-container">
+        <RecomendationConteiner>
           {recommended.slice(0, MAX_RECOMMENDATION)
             .map(({ idDrink, strDrink, strDrinkThumb, strAlcoholic }, index) => (
               <Card
@@ -105,14 +111,14 @@ export default function FoodDetails() {
                 category={ strAlcoholic }
               />
             ))}
-        </div>
+        </RecomendationConteiner>
         <Button
           id={ id }
           type="meals"
           page="foods"
         />
       </div>
-    </div>
+    </MainConteiner>
 
   );
 }

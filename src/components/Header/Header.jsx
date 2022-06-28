@@ -6,7 +6,7 @@ import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import './Header.css';
 import {
-  HeaderConteiner,
+  HeaderContainer,
   HeaderMain,
   Image,
   Title,
@@ -115,7 +115,7 @@ export default function Header({ title }) {
   }, [fetchedFoodOrDrink]);
 
   return (
-    <HeaderConteiner>
+    <HeaderContainer>
       <HeaderMain>
         <Link
           to="/profile"
@@ -192,7 +192,7 @@ export default function Header({ title }) {
           </>
         )}
       </div>
-    </HeaderConteiner>
+    </HeaderContainer>
   );
 }
 

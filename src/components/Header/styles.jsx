@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const HeaderConteiner = styled.div`
+const HeaderContainer = styled.div`
 align-items: center;
   background-color: #422800;
   display: flex;
@@ -69,7 +69,7 @@ const FilterInput = styled.input`
   touch-action: manipulation;
 `;
 export {
-  HeaderConteiner,
+  HeaderContainer,
   HeaderMain,
   Image,
   Title,

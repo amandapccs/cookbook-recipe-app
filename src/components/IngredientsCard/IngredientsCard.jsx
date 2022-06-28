@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { IngredientsContainer, Ingredients } from './styles';
 
 function IngredientsCard({ data }) {
   const ingredients = Object.values(Object.fromEntries(Object.entries(data)
@@ -10,18 +11,18 @@ function IngredientsCard({ data }) {
     && value !== ' ' && value)));
 
   return (
-    <ul className="ingredients-card">
+    <IngredientsContainer>
       { measures.map((measure, index) => (
-        <li
+        <Ingredients
           key={ `${ingredients[index]} - ${index}}` }
           data-testid={ `${index}-ingredient-name-and-measure` }
         >
           {' '}
           {`${measure} - ${ingredients[index]}`}
           {' '}
-        </li>
+        </Ingredients>
       ))}
-    </ul>
+    </IngredientsContainer>
   );
 }
 
