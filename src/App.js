@@ -16,6 +16,7 @@ import ExploreFoodsByNationality from './pages/ExploreFoodsByNationality';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -49,6 +50,11 @@ function App() {
             exact
             path="/explore/foods/nationalities"
             component={ ExploreFoodsByNationality }
+          />
+          <Route
+            exact
+            path="/explore/drinks/nationalities"
+            component={ NotFound }
           />
         </Switch>
       </BrowserRouter>
