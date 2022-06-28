@@ -1,19 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import drinkIcon from '../images/drinkIcon.svg';
-import exploreIcon from '../images/exploreIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../../images/drinkIcon.svg';
+import exploreIcon from '../../images/exploreIcon.svg';
+import mealIcon from '../../images/mealIcon.svg';
+import { FooterConteiner, Img } from './styles';
 
 export default function Footer() {
   return (
-    <footer
+    <FooterConteiner
       className="footerConteiner"
       data-testid="footer"
     >
       <Link
         to="/drinks"
       >
-        <img
+        <Img
           src={ drinkIcon }
           alt="drinkIcon"
           data-testid="drinks-bottom-btn"
@@ -22,7 +23,7 @@ export default function Footer() {
       <Link
         to="/explore"
       >
-        <img
+        <Img
           src={ exploreIcon }
           alt="exploreIcon"
           data-testid="explore-bottom-btn"
@@ -31,12 +32,12 @@ export default function Footer() {
       <Link
         to="/foods"
       >
-        <img
+        <Img
           src={ mealIcon }
           alt="mealIcon"
           data-testid="food-bottom-btn"
         />
       </Link>
-    </footer>
+    </FooterConteiner>
   );
 }

@@ -47,7 +47,9 @@ export default function DrinkPage() {
   }, [categoryFoodsOrDrinks, toggle]);
 
   return (
-    <div>
+    <div
+      className="main-container"
+    >
       <Header title="Drinks" />
       <CategorySearch curCategory="drinks" />
       <div

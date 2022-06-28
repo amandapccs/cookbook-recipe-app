@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Context as RecipeContext } from '../context/Provider';
+import { Context as RecipeContext } from '../../context/Provider';
 import {
   fetchApiDrinksCategory,
   fetchApiFoodsCategory,
   fetchFoodByCategory,
   fetchDrinksByCategory,
-} from '../helpers/API';
+} from '../../helpers/API';
+import { Div, Button } from './styles';
 
 function CategorySearch({ curCategory }) {
   const {
@@ -39,37 +40,43 @@ function CategorySearch({ curCategory }) {
       resultApi = await fetchDrinksByCategory(id);
     }
     setCategoryFoodsOrDrinks(resultApi);
-    if (selectedCategory === id || !selectedCategory) {
+    if (selectedCategory === id || selectedCategory === '') {
       setToggle(!toggle);
-      /* setSelectedCategory(''); */
+      if (toggle) return setSelectedCategory('');
+      setSelectedCategory(id);
     }
-    if (!toggle && selectedCategory !== id) setToggle(!toggle);
-    setSelectedCategory(id);
+    if (selectedCategory !== id) {
+      if (!toggle) return setToggle(!toggle);
+      setSelectedCategory(id);
+    }
   }
   function handleAllClick() {
     if (toggle) setToggle(!toggle);
+    setSelectedCategory('');
   }
   return (
-    <div>
-      <button
+    <Div>
+      <Button
         type="button"
         data-testid="All-category-filter"
         onClick={ () => handleAllClick() }
+        primary={ selectedCategory === '' }
       >
         All
-      </button>
+      </Button>
       {category.map((eachCategory) => (
-        <button
+        <Button
           key={ eachCategory.strCategory }
           id={ eachCategory.strCategory }
           type="button"
           onClick={ (event) => handleClick(event) }
           data-testid={ `${eachCategory.strCategory}-category-filter` }
+          primary={ selectedCategory === eachCategory.strCategory || false }
         >
           {eachCategory.strCategory}
-        </button>
+        </Button>
       ))}
-    </div>
+    </Div>
   );
 }
 

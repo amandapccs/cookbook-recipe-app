@@ -1,10 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
-import { Context } from '../context/Provider';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import { Context } from '../../context/Provider';
+import profileIcon from '../../images/profileIcon.svg';
+import searchIcon from '../../images/searchIcon.svg';
 import './Header.css';
+import {
+  HeaderConteiner,
+  HeaderMain,
+  Image,
+  Title,
+  BtnSearch,
+  Span,
+  FilterInput,
+} from './styles';
 
 export default function Header({ title }) {
   const { showSearchButton, setFetchedFoodOrDrink,
@@ -106,14 +115,14 @@ export default function Header({ title }) {
   }, [fetchedFoodOrDrink]);
 
   return (
-    <div className="header-container">
-      <div className="header-main">
+    <HeaderConteiner>
+      <HeaderMain>
         <Link
           to="/profile"
         >
-          <img src={ profileIcon } alt="Profile icon" data-testid="profile-top-btn" />
+          <Image src={ profileIcon } alt="Profile icon" data-testid="profile-top-btn" />
         </Link>
-        <h2 data-testid="page-title">{title}</h2>
+        <Title data-testid="page-title">{title}</Title>
 
         { showSearchButton && (
           <button
@@ -121,14 +130,14 @@ export default function Header({ title }) {
             className="search-btn"
             onClick={ () => setShowSeachInput(!showSearchInput) }
           >
-            <img src={ searchIcon } alt="Search icon" data-testid="search-top-btn" />
+            <Image src={ searchIcon } alt="Search icon" data-testid="search-top-btn" />
           </button>
         )}
-      </div>
+      </HeaderMain>
       <div className="header-search">
         { showSearchInput && (
           <>
-            <input
+            <FilterInput
               type="text"
               className="search-input"
               value={ searchInputValue }
@@ -147,7 +156,7 @@ export default function Header({ title }) {
                   onClick={ ({ target }) => setSelectedRadioOption(target.value) }
                   data-testid="ingredient-search-radio"
                 />
-                <span>Ingredient</span>
+                <Span>Ingredient</Span>
               </label>
               <label htmlFor="name">
                 <input
@@ -158,7 +167,7 @@ export default function Header({ title }) {
                   onClick={ ({ target }) => setSelectedRadioOption(target.value) }
                   data-testid="name-search-radio"
                 />
-                <span>Name</span>
+                <Span>Name</Span>
               </label>
               <label htmlFor="first-letter">
                 <input
@@ -169,21 +178,21 @@ export default function Header({ title }) {
                   onClick={ ({ target }) => setSelectedRadioOption(target.value) }
                   data-testid="first-letter-search-radio"
                 />
-                <span>First Letter</span>
+                <Span>First Letter</Span>
               </label>
             </div>
 
-            <button
+            <BtnSearch
               type="button"
               onClick={ searchFood }
               data-testid="exec-search-btn"
             >
               Search
-            </button>
+            </BtnSearch>
           </>
         )}
       </div>
-    </div>
+    </HeaderConteiner>
   );
 }
 

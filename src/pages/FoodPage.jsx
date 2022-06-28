@@ -46,7 +46,9 @@ function FoodPage() {
   }, [categoryFoodsOrDrinks, toggle]);
 
   return (
-    <div>
+    <div
+      className="main-container"
+    >
       <Header title="Foods" />
       <CategorySearch curCategory="foods" />
       <div

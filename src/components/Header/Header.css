@@ -1,18 +1,3 @@
-.header-container {
-  align-items: center;
-  background-color: #e5e5e5;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.header-main {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
 .search-btn {
   background: none;
   border: none;
