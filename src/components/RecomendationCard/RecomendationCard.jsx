@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import RecomendationContainer from './styles';
 
 function Card({ src, name, id, path, testDiv, testTitle, testImg, category }) {
   return (
-    <Link to={ `/${path}/${id}` } data-testid={ testDiv } className="card-recomendation">
+    <RecomendationContainer
+      to={ `/${path}/${id}` }
+      data-testid={ testDiv }
+      className="card-recomendation"
+    >
       <img
         src={ src }
         alt={ name }
@@ -17,7 +21,7 @@ function Card({ src, name, id, path, testDiv, testTitle, testImg, category }) {
       >
         { name }
       </h4>
-    </Link>
+    </RecomendationContainer>
 
   );
 }

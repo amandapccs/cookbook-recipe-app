@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import backGroundImg from '../../images/backGroundImg.jpeg';
+import TvImg from '../../images/TvImg.png';
 
 export const MainConteiner = styled.div`
   background-image: url(${backGroundImg});
   width: 100%;
   min-height: 100vh;
-  margin-bottom: 3.5rem;
   display:flex;
   flex-direction:column;
 `;
@@ -37,9 +37,11 @@ export const FoodTitle = styled.h1`
   border-radius: 15px;
   font-weight: 700;
   padding:0 10px;
+  max-width: 90%;
+  text-align:center;
 `;
 
-export const IngredientsTitle = styled.h1`
+export const Title = styled.h1`
   margin:auto;
   font-size:25px;
   font-weight:800;
@@ -63,4 +65,20 @@ export const InstructionsContainer = styled.div`
   border-radius: 16px;
   margin: 5px;
   padding:5px;
+`;
+
+export const ConteinerVideoRecipe = styled.div`
+  background-image: url(${TvImg});
+  background-size: 360px 230px;
+  background-repeat: no-repeat;
+  width:340px;
+  height:240px;
+`;
+
+export const Video = styled.iframe`
+  display:flex;
+  margin:auto;
+  margin-left: 53px;
+  margin-top:44px;
+  border-radius:15%;
 `;

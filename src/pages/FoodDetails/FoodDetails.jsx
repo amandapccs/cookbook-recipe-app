@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IngredientsCard from '../../components/IngredientsCard/IngredientsCard';
-import Card from '../../components/RecomendationCard';
-import Button from '../../components/ButtonStartRecipe';
+import Card from '../../components/RecomendationCard/RecomendationCard';
+import Button from '../../components/ButtonStartRecipe/ButtonStartRecipe';
 import ShareAndFav from '../../components/ButtonsShareAndFav';
 import './Details.css';
 import {
@@ -10,10 +10,12 @@ import {
   MainConteiner,
   FoodImg,
   FoodTitle,
-  IngredientsTitle,
+  Title,
   ShareAndFavContainer,
   FoodInstructions,
   InstructionsContainer,
+  ConteinerVideoRecipe,
+  Video,
 } from './styles';
 
 export default function FoodDetails() {
@@ -72,53 +74,49 @@ export default function FoodDetails() {
           page="foods"
         />
       </ShareAndFavContainer>
-      <IngredientsTitle>Ingredients</IngredientsTitle>
+      <Title>Ingredients</Title>
       <IngredientsCard data={ foodDetails } />
-      <IngredientsTitle>Instructions</IngredientsTitle>
+      <Title>Instructions</Title>
       <InstructionsContainer>
         <FoodInstructions>
           { foodDetails.strInstructions }
         </FoodInstructions>
 
       </InstructionsContainer>
-      <div className="details">
-        <h2>Video</h2>
-        <div className="video">
-          <iframe
-            data-testid="video"
-            width="340"
-            height="200"
-            src={ `https://www.youtube.com/embed/${YTCode}` }
-            title={ foodDetails.strMeal }
-            frameBorder="0"
-            allowFullScreen
-          />
-        </div>
-
-        <h2>Recommended</h2>
-        <RecomendationConteiner>
-          {recommended.slice(0, MAX_RECOMMENDATION)
-            .map(({ idDrink, strDrink, strDrinkThumb, strAlcoholic }, index) => (
-              <Card
-                key={ index }
-                src={ strDrinkThumb }
-                name={ strDrink }
-                testDiv={ `${index}-recomendation-card` }
-                testTitle={ `${index}-recomendation-title` }
-                testImg={ `${index}-card-img` }
-                id={ idDrink }
-                path="drinks"
-                category={ strAlcoholic }
-              />
-            ))}
-        </RecomendationConteiner>
-        <Button
-          id={ id }
-          type="meals"
-          page="foods"
+      <Title>Video</Title>
+      <ConteinerVideoRecipe>
+        <Video
+          data-testid="video"
+          width="230"
+          height="155"
+          src={ `https://www.youtube.com/embed/${YTCode}` }
+          title={ foodDetails.strMeal }
+          frameBorder="0"
+          allowFullScreen
         />
-      </div>
+      </ConteinerVideoRecipe>
+      <Title>Recommended</Title>
+      <RecomendationConteiner>
+        {recommended.slice(0, MAX_RECOMMENDATION)
+          .map(({ idDrink, strDrink, strDrinkThumb, strAlcoholic }, index) => (
+            <Card
+              key={ index }
+              src={ strDrinkThumb }
+              name={ strDrink }
+              testDiv={ `${index}-recomendation-card` }
+              testTitle={ `${index}-recomendation-title` }
+              testImg={ `${index}-card-img` }
+              id={ idDrink }
+              path="drinks"
+              category={ strAlcoholic }
+            />
+          ))}
+      </RecomendationConteiner>
+      <Button
+        id={ id }
+        type="meals"
+        page="foods"
+      />
     </MainConteiner>
-
   );
 }

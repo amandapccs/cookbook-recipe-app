@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { getDoneRecipes, getInProgressRecipes } from '../helpers/LocalStorage';
+import { getDoneRecipes, getInProgressRecipes } from '../../helpers/LocalStorage';
+import { StartFinishRecipe, StartFinishContainer } from './styles';
 
 function Button({ id, type, page }) {
   const history = useHistory();
@@ -25,32 +26,34 @@ function Button({ id, type, page }) {
           .some((progressrecipe) => progressrecipe === id);
         if (inProgress) {
           return (
-            <button
+            <StartFinishRecipe
               data-testid="start-recipe-btn"
-              className="btn-details btn btn-danger"
               type="button"
               onClick={ () => { history.push(`/${page}/${id}/in-progress`); } }
               value="Continue Recipe"
             >
               Continue Recipe
-            </button>
+            </StartFinishRecipe>
           );
         }
-        return (<input
-          data-testid="start-recipe-btn"
-          className="btn-details btn btn-danger"
-          type="button"
-          onClick={ redirectToProgress }
-          value="Start Recipe"
-        />);
+        return (
+          <StartFinishRecipe
+            data-testid="start-recipe-btn"
+            type="button"
+            onClick={ () => redirectToProgress() }
+            value="Start Recipe"
+          >
+            Start Recipe
+          </StartFinishRecipe>
+        );
       }
     }
   };
 
   return (
-    <div className="btn-div">
+    <StartFinishContainer className="btn-div">
       {buttonStart()}
-    </div>
+    </StartFinishContainer>
   );
 }
 
