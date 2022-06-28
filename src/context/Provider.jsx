@@ -10,6 +10,7 @@ export default function Provider({ children }) {
   const [category, setCategory] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [categoryFoodsOrDrinks, setCategoryFoodsOrDrinks] = useState([]);
+  const [exploreTrue, setExploreTrue] = useState(false);
 
   const contextValue = {
     showSearchButton,
@@ -24,6 +25,8 @@ export default function Provider({ children }) {
     setToggle,
     categoryFoodsOrDrinks,
     setCategoryFoodsOrDrinks,
+    exploreTrue,
+    setExploreTrue,
   };
 
   return (

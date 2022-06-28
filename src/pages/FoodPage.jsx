@@ -14,6 +14,8 @@ function FoodPage() {
     setFetchedFoodOrDrink,
     toggle,
     categoryFoodsOrDrinks,
+    exploreTrue,
+    setExploreTrue,
   } = useContext(RecipeContext);
 
   const MAX_LIST = 12;
@@ -31,8 +33,9 @@ function FoodPage() {
   }, [fetchedFoodOrDrink]);
 
   useEffect(() => {
+    if (!exploreTrue) inicialData();
+    setExploreTrue(false);
     setShowSearchButton(true);
-    inicialData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Card({ src, name, indexID, id, path }) {
   return (
-    <Link to={ `${path}/${id}` } className="card">
+    <Link to={ `/${path}/${id}` } className="card">
       <div
         data-testid={ `${indexID}-recipe-card` }
       >
