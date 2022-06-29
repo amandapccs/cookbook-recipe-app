@@ -5,7 +5,20 @@ import favIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import InProgressIngredients from '../../components/InProgressIngredients';
 import { Context as RecipeContext } from '../../context/Provider';
-import { MainConteiner } from './styles';
+
+import {
+  // RecomendationConteiner,
+  MainConteiner,
+  FoodImg,
+  FoodTitle,
+  Title,
+  // ShareAndFavContainer,
+  FoodInstructions,
+  InstructionsContainer,
+  ShareAndFavContainer,
+  Buttons,
+  LinkCopied,
+} from './styles';
 
 export default function FoodProgress() {
   const history = useHistory();
@@ -103,43 +116,46 @@ export default function FoodProgress() {
 
   return (
     <MainConteiner>
-      <h1>Food in Progress</h1>
-      <img
+      <FoodTitle data-testid="recipe-title">
+        { foodDetails.strMeal }
+      </FoodTitle>
+      <FoodImg
         data-testid="recipe-photo"
         width="360"
         height="200"
         src={ foodDetails.strMealThumb }
         alt={ `${foodDetails.strMeal}` }
       />
-      <button
-        type="button"
-        onClick={ copyToClipboard }
-      >
-        <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
-      </button>
-      <button
-        type="button"
-        onClick={ handleFavoriteClick }
-      >
-        <img
-          src={ favoriteIcon }
-          alt="Fav icon"
-          data-testid="favorite-btn"
-        />
-      </button>
-      { copied && <span>Link copied!</span>}
-      <h1 data-testid="recipe-title">
-        { foodDetails.strMeal }
-      </h1>
-      <h3 data-testid="recipe-category">
-        { foodDetails.strCategory }
-      </h3>
-      <h2>Ingredients</h2>
+
+      <ShareAndFavContainer>
+        <Buttons
+          type="button"
+          onClick={ copyToClipboard }
+        >
+          <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
+        </Buttons>
+        <Buttons
+          type="button"
+          onClick={ handleFavoriteClick }
+        >
+          <img
+            src={ favoriteIcon }
+            alt="Fav icon"
+            data-testid="favorite-btn"
+          />
+        </Buttons>
+        { copied && <LinkCopied>Link copied!</LinkCopied>}
+      </ShareAndFavContainer>
+
+      <Title>Ingredients</Title>
       <InProgressIngredients data={ foodDetails } />
-      <h2>Instructions</h2>
-      <p data-testid="instructions">
-        { foodDetails.strInstructions }
-      </p>
+      <Title>Instructions</Title>
+      <InstructionsContainer>
+        <FoodInstructions data-testid="instructions">
+          { foodDetails.strInstructions }
+        </FoodInstructions>
+      </InstructionsContainer>
+
       <button
         data-testid="finish-recipe-btn"
         type="button"

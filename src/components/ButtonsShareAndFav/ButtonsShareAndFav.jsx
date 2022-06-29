@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import shareIcon from '../../images/shareIcon.svg';
 import favIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import { Buttons, HeartIcon, LinkCopied } from './styles';
 
 function ShareAndFav({ id, image, category, area, name, type, alcoholic, idType, page }) {
   const [copied, setCopied] = useState(false);
@@ -39,22 +40,22 @@ function ShareAndFav({ id, image, category, area, name, type, alcoholic, idType,
 
   return (
     <div className="btns-share-fav">
-      <button
+      <Buttons
         type="button"
         className="btn-share"
         onClick={ copyToClipboard }
       >
         <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
-      </button>
-      <button
+      </Buttons>
+      <Buttons
         type="button"
         className="btn-fav"
         onClick={ handleFavoriteClick }
       >
-        <img src={ favoriteIcon } alt="Fav icon" data-testid="favorite-btn" />
-      </button>
+        <HeartIcon src={ favoriteIcon } alt="Fav icon" data-testid="favorite-btn" />
+      </Buttons>
       <br />
-      { copied && <span>Link copied!</span>}
+      { copied && <LinkCopied>Link copied!</LinkCopied>}
     </div>
   );
 }
