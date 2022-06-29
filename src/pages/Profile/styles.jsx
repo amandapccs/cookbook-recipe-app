@@ -15,7 +15,6 @@ export const MainConteiner = styled.div`
 
 export const Form = styled.form`
    display: flex;
-  ${'' /* justify-content: center; */}
   align-items: center;
   align-content: center;
   flex-direction: raw;
@@ -41,21 +40,20 @@ export const ProfileContainer = styled.div`
 `;
 
 export const Input = styled.input`
+  background-color: #ffffff86;
+  border-radius: 16px;
+  margin: 5px;
+  padding:10px;
 
-  ${'' /* // mudei aqui */}
   margin: 2px;
 
   background-color: ${(props) => (props.primary ? '#422800' : '#fbeee0 ')};
   color: ${(props) => (props.primary ? '#fbeee0' : '#422800 ')};
   border: 2px solid #422800;
   border-radius: 30px;
-  box-shadow: #422800 4px 4px 0 0;
   cursor: pointer;
   display: inline-block;
   font-weight: 600;
-  ${'' /* ${''
-  font-size: 20px;
-  padding: 10 20px; } */}
   font-size: 12px;
   padding: 0 18px;
   line-height: 30px;
@@ -65,35 +63,44 @@ export const Input = styled.input`
   -webkit-user-select: none;
   touch-action: manipulation;
 
-  :active {
-  box-shadow: #422800 2px 2px 0 0;
-  transform: translate(2px, 2px);
-}
+`;
+
+export const ProfileImgContainer = styled.div`
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
 `;
 
 export const ProfileImg = styled.img`
   box-shadow: #fbeee0 4px 4px 5px 0;
-  margin:auto;
-  margin-top:15px;
-  width: 90%;
-  height: 15rem;
-  border-radius: 6%;
+  max-width: 400px;
+  max-height: 400px;
+  margin: -75px 0 0 -100px;
 `;
 
 export const EditContainer = styled.form`
+  background-color: #ffffff86;
+  border-radius: 16px;
+  margin: 5px;
+  padding:10px;
   display: flex;
   align-items: center;
   align-content: center;
   flex-direction: column;
   margin: 5px;
-  ${'' /* margin:auto;
-  font-size:20px;
-  font-weight:800;
-  color:  #422800; */}
+  h2 {
+    font-size: 20px;
+  }
 `;
 
 export const Prizes = styled.div`
+  background-color: #ffffff86;
+  border-radius: 16px;
+  margin: 5px;
+  padding:10px;
   display: flex;
+  justify-content: space-be
   align-items: center;
   align-content: center;
   flex-direction: row;
@@ -102,12 +109,11 @@ export const Prizes = styled.div`
   img {
     width: 100px;
     height: 100px;
+    margin: 5px;
   }
   p {
+    margin: 8px;
+    text-align: center;
     font-size: 20px;
   }
-  ${'' /* margin:auto;
-  font-size:20px;
-  font-weight:800;
-  color:  #422800; */}
 `;

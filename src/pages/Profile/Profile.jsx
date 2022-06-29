@@ -13,6 +13,7 @@ import {
   ProfileImg,
   EditContainer,
   Input,
+  ProfileImgContainer,
 } from './styles';
 
 import { addProfileLocalStorage } from '../../helpers/LocalStorage';
@@ -71,10 +72,13 @@ export default function Profile() {
 
         <ProfileContainer>
           { readUser.img && (
-            <ProfileImg
-              src={ readUser.img }
-              alt="User Img"
-            />
+            <ProfileImgContainer>
+              <ProfileImg
+                src={ readUser.img }
+                alt="User Img"
+              />
+            </ProfileImgContainer>
+
           ) }
           <h2>
             { readUser && readUser.name }
@@ -90,7 +94,7 @@ export default function Profile() {
 
         {edit && (
           <EditContainer>
-            <h4>Name:</h4>
+            <h2>Name:</h2>
             <Input
               type="text"
               id="name"
@@ -98,7 +102,7 @@ export default function Profile() {
               onChange={ changeInput }
               placeholder={ readUser.name || 'Name' }
             />
-            <h4>Email:</h4>
+            <h2>Email:</h2>
             <Input
               type="text"
               id="email"
@@ -106,16 +110,17 @@ export default function Profile() {
               onChange={ changeInput }
               placeholder={ readUser.email || 'Email' }
             />
-            <h4>Profile Image URL:</h4>
+            <h2>Profile Image:</h2>
             <Input
               type="img"
               id="image"
               value={ image }
               onChange={ changeInput }
+              placeholder={ readUser.img || 'Insert an URL' }
             />
             {/* </label> */}
             <Button
-              name="Save?"
+              name="Save"
               onClick={ salvar }
             />
           </EditContainer>
