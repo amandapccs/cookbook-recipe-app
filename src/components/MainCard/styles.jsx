@@ -25,11 +25,7 @@ const LinkConteiner = styled(Link)`
 `;
 
 const CardTitle = styled.h3`
-  /* margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
- */
+  padding: 6px;
   margin-top: 1rem;
   background-color: #fbeee0;
   color: #422800;
@@ -39,7 +35,7 @@ const CardTitle = styled.h3`
   justify-content: center;
   border-radius: 30px;
   font-weight: 1000;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
   text-decoration: none;
   user-select: none;

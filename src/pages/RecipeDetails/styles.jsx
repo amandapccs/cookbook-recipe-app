@@ -35,7 +35,6 @@ export const FoodTitle = styled.h1`
   color: #422800;
   border: 2px solid #422800;
   border-radius: 15px;
-  font-weight: 700;
   padding:0 10px;
   max-width: 90%;
   text-align:center;
@@ -44,7 +43,6 @@ export const FoodTitle = styled.h1`
 export const Title = styled.h1`
   margin:auto;
   font-size:25px;
-  font-weight:800;
   color:  #422800;
 `;
 

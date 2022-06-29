@@ -14,7 +14,7 @@ import ExploreFoodsByIngredients from './pages/ByIngredients/ExploreFoodsByIngre
 import ExploreDrinksByIngredients from './pages/ByIngredients/ExploreDrinksByIngredients';
 import ExploreFoodsByNationality from './pages/ByNationalities/ExploreFoodsByNationality';
 import Profile from './pages/Profile';
-import DoneRecipes from './pages/DoneRecipes';
+import DoneRecipes from './pages/DoneRecipes/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import NotFound from './pages/NotFound';
 
