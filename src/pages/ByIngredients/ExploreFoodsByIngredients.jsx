@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { Context as RecipeContext } from '../context/Provider';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import { Context as RecipeContext } from '../../context/Provider';
+import Card from '../../components/IngredientsFilter/IngredientsFilter';
+import MainConteiner from './styles';
 
 export default function ExploreFoodsByIngredients() {
   const { setShowSearchButton,
@@ -44,28 +46,18 @@ export default function ExploreFoodsByIngredients() {
   return (
     <div>
       <Header title="Explore Ingredients" />
-      <div>
+      <MainConteiner>
         {ingredients.slice(0, MAX_INGREDIENTS)
           .map(({ strIngredient }, index) => (
-            <button
-              data-testid={ `${index}-ingredient-card` }
-              type="button"
-              onClick={ () => handleClick(strIngredient) }
-              key={ index }
-            >
-              <img
-                src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-                alt={ strIngredient }
-                data-testid={ `${index}-card-img` }
-              />
-              <h4
-                data-testid={ `${index}-card-name` }
-              >
-                { strIngredient }
-              </h4>
-            </button>
+            <Card
+              key={ `key-${index}` }
+              index={ index }
+              strIngredient={ strIngredient }
+              click={ () => handleClick(strIngredient) }
+              src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+            />
           ))}
-      </div>
+      </MainConteiner>
       <Footer />
     </div>
   );

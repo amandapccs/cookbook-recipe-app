@@ -16,6 +16,10 @@ const RecomendationContainer = styled(Link)`
   h5, h4 {
     color:#422800;
     font-weight: 800;
+    margin: 0;
+  }
+  h5 {
+    font-size: 15px;
   }
 `;
 

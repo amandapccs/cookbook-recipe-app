@@ -4,7 +4,7 @@ import IngredientsCard from '../../components/IngredientsCard/IngredientsCard';
 import Card from '../../components/RecomendationCard/RecomendationCard';
 import Button from '../../components/ButtonStartRecipe/ButtonStartRecipe';
 import ShareAndFav from '../../components/ButtonsShareAndFav';
-import './Details.css';
+
 import {
   RecomendationConteiner,
   MainConteiner,
@@ -62,7 +62,7 @@ export default function FoodDetails() {
         src={ foodDetails.strMealThumb }
         alt={ `${foodDetails.strMeal}` }
       />
-      <ShareAndFavContainer className="details-header">
+      <ShareAndFavContainer>
         <ShareAndFav
           id={ id }
           idType={ foodDetails.idMeal }
@@ -77,11 +77,10 @@ export default function FoodDetails() {
       <Title>Ingredients</Title>
       <IngredientsCard data={ foodDetails } />
       <Title>Instructions</Title>
-      <InstructionsContainer>
+      <InstructionsContainer data-testid="instructions">
         <FoodInstructions>
           { foodDetails.strInstructions }
         </FoodInstructions>
-
       </InstructionsContainer>
       <Title>Video</Title>
       <ConteinerVideoRecipe>
@@ -112,11 +111,13 @@ export default function FoodDetails() {
             />
           ))}
       </RecomendationConteiner>
+
       <Button
         id={ id }
         type="meals"
         page="foods"
       />
+
     </MainConteiner>
   );
 }

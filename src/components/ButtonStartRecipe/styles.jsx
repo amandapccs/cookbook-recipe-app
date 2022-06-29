@@ -12,18 +12,12 @@ export const StartFinishRecipe = styled.button`
   position: fixed;
   bottom:0;
   margin-bottom:8px;
+  display: flex;
+  justify-content: center;
 
 `;
 
 export const StartFinishContainer = styled.div`
-  /* position: fixed;
-  height: 3.5rem;
-  padding: 1.25rem;
-  width: 100%;
-  align-items: center;
-  justify-content:center;
   display: flex;
-  bottom: 0;
-  background-color: #422800;
-  flex-shrink:0; */
+  justify-content: center;
 `;
