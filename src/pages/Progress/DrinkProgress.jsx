@@ -1,10 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
-import favIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import InProgressIngredients from '../components/InProgressIngredients';
-import { Context as RecipeContext } from '../context/Provider';
+import shareIcon from '../../images/shareIcon.svg';
+import favIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import InProgressIngredients from '../../components/InProgressIngredients';
+import { Context as RecipeContext } from '../../context/Provider';
+
+import {
+  // RecomendationConteiner,
+  MainConteiner,
+  FoodImg,
+  FoodTitle,
+  Title,
+  FoodInstructions,
+  InstructionsContainer,
+  ShareAndFavContainer,
+  Buttons,
+  LinkCopied,
+} from './styles';
 
 export default function DrinkProgress() {
   const history = useHistory();
@@ -98,40 +111,44 @@ export default function DrinkProgress() {
   };
 
   return (
-    <div>
-      <h1>Drink in Progress</h1>
-      <img
+    <MainConteiner>
+      <FoodTitle data-testid="recipe-title">
+        { drinksDetails.strDrink }
+      </FoodTitle>
+
+      <Title data-testid="recipe-category">
+        { drinksDetails.strAlcoholic }
+      </Title>
+      <FoodImg
         data-testid="recipe-photo"
         width="360"
         height="200"
         src={ drinksDetails.strDrinkThumb }
         alt={ `${drinksDetails.strDrink}` }
       />
-      <button
-        type="button"
-        onClick={ copyToClipboard }
-      >
-        <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
-      </button>
-      <button
-        type="button"
-        onClick={ handleFavoriteClick }
-      >
-        <img src={ favoriteIcon } alt="Fav icon" data-testid="favorite-btn" />
-      </button>
-      { copied && <span>Link copied!</span>}
-      <h1 data-testid="recipe-title">
-        { drinksDetails.strDrink }
-      </h1>
-      <h3 data-testid="recipe-category">
-        { drinksDetails.strAlcoholic }
-      </h3>
-      <h2>Ingredients</h2>
+      <ShareAndFavContainer>
+        <Buttons
+          type="button"
+          onClick={ copyToClipboard }
+        >
+          <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
+        </Buttons>
+        <Buttons
+          type="button"
+          onClick={ handleFavoriteClick }
+        >
+          <img src={ favoriteIcon } alt="Fav icon" data-testid="favorite-btn" />
+        </Buttons>
+        { copied && <LinkCopied>Link copied!</LinkCopied>}
+      </ShareAndFavContainer>
+      <Title>Ingredients</Title>
       <InProgressIngredients data={ drinksDetails } />
-      <h2>Instructions</h2>
-      <p data-testid="instructions">
-        { drinksDetails.strInstructions }
-      </p>
+      <Title>Instructions</Title>
+      <InstructionsContainer>
+        <FoodInstructions>
+          { drinksDetails.strInstructions }
+        </FoodInstructions>
+      </InstructionsContainer>
 
       <button
         data-testid="finish-recipe-btn"
@@ -141,6 +158,6 @@ export default function DrinkProgress() {
       >
         Finish Recipe
       </button>
-    </div>
+    </MainConteiner>
   );
 }

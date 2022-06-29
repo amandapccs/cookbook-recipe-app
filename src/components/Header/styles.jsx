@@ -6,7 +6,8 @@ const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height:2.8rem;
+  padding-bottom: 5px;
+  /* height:2.8rem; */
 `;
 const HeaderMain = styled.div`
   align-items: center;
