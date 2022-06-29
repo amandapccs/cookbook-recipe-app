@@ -27,6 +27,7 @@ filter:
 const Title = styled.h2`
   color:#fbeee0;
   margin: auto;
+  margin-bottom: 5px;
 `;
 const BtnSearch = styled.button`
   background-color: #fbeee0;
@@ -35,9 +36,7 @@ const BtnSearch = styled.button`
   border-radius: 30px;
   display: inline-block;
   font-weight: 1000;
-  font-size: 16px;
   width:100%;
-  /* padding: 0 40%; */
   line-height: 30px;
   text-align: center;
   text-decoration: none;
@@ -50,11 +49,6 @@ const Span = styled.span`
   font-weight: 700;
 `;
 const FilterInput = styled.input`
-  /* background-color: #fbeee0;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin: 10px 0;
-  width: 350px; */
   background-color: #fbeee0;
   color:#422800;
   border: 2px solid #3a2300;
@@ -63,7 +57,6 @@ const FilterInput = styled.input`
   font-weight: 1000;
   font-size: 16px;
   width: 300px;
-  /* padding: 0 40%; */
   line-height: 30px;
   text-align: center;
   text-decoration: none;

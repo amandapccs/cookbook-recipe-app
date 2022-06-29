@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Header from '../components/Header';
-import { Context as RecipeContext } from '../context/Provider';
-import CardFavRecipes from '../components/CardFavRecipes';
-// import FilterButtonsFav from '../components/FilterButtonsFav';
+import Header from '../../components/Header';
+import { Context as RecipeContext } from '../../context/Provider';
+import CardFavRecipes from '../../components/CardFavRecipes/CardFavRecipes';
+import { RecipesContainer, MainContainer, ButtonsSection, Button } from './styles';
 
 export default function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -35,58 +35,60 @@ export default function FavoriteRecipes() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div>
+    <MainContainer>
       <Header title="Favorite Recipes" />
-      <div>
-        <button
+      <ButtonsSection>
+        <Button
           type="button"
           data-testid="filter-by-all-btn"
           onClick={ () => filterDataByType('all') }
         >
           All
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           data-testid="filter-by-food-btn"
           onClick={ () => filterDataByType('food') }
         >
           Food
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           data-testid="filter-by-drink-btn"
           onClick={ () => filterDataByType('drink') }
         >
           Drinks
-        </button>
-      </div>
-      {filteredData.map(
-        ({
-          image,
-          name,
-          category,
-          doneDate,
-          tags,
-          type,
-          nationality,
-          alcoholicOrNot,
-          id,
-        }, index) => (
-          <CardFavRecipes
-            key={ index }
-            image={ image }
-            name={ name }
-            category={ category }
-            doneDate={ doneDate }
-            tags={ tags }
-            index={ index }
-            type={ type }
-            area={ nationality }
-            alcoholic={ alcoholicOrNot }
-            id={ id }
-            setFilteredData={ setFilteredData }
-          />),
-      )}
-    </div>
+        </Button>
+      </ButtonsSection>
+      <RecipesContainer>
+        {filteredData.map(
+          ({
+            image,
+            name,
+            category,
+            doneDate,
+            tags,
+            type,
+            nationality,
+            alcoholicOrNot,
+            id,
+          }, index) => (
+            <CardFavRecipes
+              key={ index }
+              image={ image }
+              name={ name }
+              category={ category }
+              doneDate={ doneDate }
+              tags={ tags }
+              index={ index }
+              type={ type }
+              area={ nationality }
+              alcoholic={ alcoholicOrNot }
+              id={ id }
+              setFilteredData={ setFilteredData }
+            />),
+        )}
+      </RecipesContainer>
+    </MainContainer>
   );
 }

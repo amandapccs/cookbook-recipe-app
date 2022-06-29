@@ -25,7 +25,6 @@ export const FoodTitle = styled.h1`
   color: #422800;
   border: 2px solid #422800;
   border-radius: 15px;
-  font-weight: 700;
   padding:0 10px;
   max-width: 90%;
   text-align:center;
@@ -73,4 +72,21 @@ export const LinkCopied = styled.span`
   border-radius: 5px;
   font-weight: 600;
   padding: 2px;
+`;
+
+export const FinishRecipeButton = styled.button`
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  background-color:#fbeee0;
+  color:#422800;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin: auto;
+  margin-bottom:8px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  max-width: 95%;
+  padding: 10px;
 `;

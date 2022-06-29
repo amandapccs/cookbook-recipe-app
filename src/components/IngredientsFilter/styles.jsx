@@ -8,6 +8,7 @@ const ButtonContainer = styled.button`
   margin-bottom: 0px;
   height: 16.25rem;
   width: 100%;
+  border: none;
 `;
 
 const Image = styled.img`
@@ -30,6 +31,7 @@ const CardTitle = styled.h4`
   align-items: center;
   justify-content: center;
  */
+  padding: 5px;
   margin-top: 1rem;
   background-color: #fbeee0;
   color: #422800;
@@ -39,7 +41,7 @@ const CardTitle = styled.h4`
   justify-content: center;
   border-radius: 30px;
   font-weight: 1000;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
   text-decoration: none;
   user-select: none;

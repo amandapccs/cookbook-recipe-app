@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
+import shareIcon from '../../images/shareIcon.svg';
+import { RecipeContainer, RecipeImg } from './styles';
 
 function CardDoneRecipes({
   image,
@@ -24,48 +25,52 @@ function CardDoneRecipes({
   };
   console.log(tags);
   return (
-    <div>
+    <RecipeContainer>
       <Link to={ `/${type}s/${id}` }>
-        <img
+        <RecipeImg
           src={ image }
           alt={ name }
           data-testid={ `${index}-horizontal-image` }
           className="recipe-done-image"
         />
-        <h3 data-testid={ `${index}-horizontal-name` }>
-          {name}
-        </h3>
       </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>
-        {type === 'food' ? (
-          `${area} - ${category}`
-        ) : (
-          `${alcoholic}`
-        )}
-      </p>
-      <p data-testid={ `${index}-horizontal-done-date` }>
-        {doneDate}
-      </p>
       <div>
-        {tags && tags.map((tagName) => (
-          <p
-            data-testid={ `${index}-${tagName}-horizontal-tag` }
-            key={ `${tagName}${index}` }
-          >
-            {tagName}
-          </p>
-        ))}
+        <Link to={ `/${type}s/${id}` }>
+          <h3 data-testid={ `${index}-horizontal-name` }>
+            {name}
+          </h3>
+        </Link>
+        <p data-testid={ `${index}-horizontal-top-text` }>
+          {type === 'food' ? (
+            `${area} - ${category}`
+          ) : (
+            `${alcoholic}`
+          )}
+        </p>
+        <p data-testid={ `${index}-horizontal-done-date` }>
+          {doneDate}
+        </p>
+        <div>
+          {tags && tags.map((tagName) => (
+            <p
+              data-testid={ `${index}-${tagName}-horizontal-tag` }
+              key={ `${tagName}${index}` }
+            >
+              {tagName}
+            </p>
+          ))}
+        </div>
+        <button
+          data-testid={ `${index}-horizontal-share-btn` }
+          type="button"
+          src="src/images/shareIcon.svg"
+          onClick={ copyToClipboard }
+        >
+          <img src={ shareIcon } alt="share" />
+        </button>
+        { copied && <span>Link copied!</span>}
       </div>
-      <button
-        data-testid={ `${index}-horizontal-share-btn` }
-        type="button"
-        src="src/images/shareIcon.svg"
-        onClick={ copyToClipboard }
-      >
-        <img src={ shareIcon } alt="share" />
-      </button>
-      { copied && <span>Link copied!</span>}
-    </div>
+    </RecipeContainer>
   );
 }
 
