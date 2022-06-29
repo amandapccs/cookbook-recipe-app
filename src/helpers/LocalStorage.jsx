@@ -2,6 +2,10 @@ export const addEmailLocalStorage = (email) => {
   localStorage.setItem('user', JSON.stringify({ email }));
 };
 
+export const addProfileLocalStorage = (email, img, name) => {
+  localStorage.setItem('user', JSON.stringify({ email, img, name }));
+};
+
 export const addMealsToken = (token) => {
   localStorage.setItem('mealsToken', JSON.stringify(token));
 };

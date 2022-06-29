@@ -58,6 +58,7 @@ export const FoodInstructions = styled.p`
   font-size:17px;
   background-color:transparent;
 `;
+
 export const InstructionsContainer = styled.div`
   background-color: #ffffff86;
   border-radius: 16px;

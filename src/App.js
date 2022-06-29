@@ -13,7 +13,7 @@ import ExploreDrinks from './pages/Explore/ExploreDrinks';
 import ExploreFoodsByIngredients from './pages/ByIngredients/ExploreFoodsByIngredients';
 import ExploreDrinksByIngredients from './pages/ByIngredients/ExploreDrinksByIngredients';
 import ExploreFoodsByNationality from './pages/ByNationalities/ExploreFoodsByNationality';
-import Profile from './pages/Profile';
+import Profile from './pages/Profile/Profile';
 import DoneRecipes from './pages/DoneRecipes/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes/FavoriteRecipes';
 import NotFound from './pages/NotFound';
