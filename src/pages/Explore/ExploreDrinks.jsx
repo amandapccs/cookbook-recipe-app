@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { Context } from '../context/Provider';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import { Context } from '../../context/Provider';
+import Button from '../../components/Button/Button';
+import MainConteiner from './styles';
 
 export default function ExploreDrinks() {
   const { setShowSearchButton } = useContext(Context);
@@ -28,20 +30,21 @@ export default function ExploreDrinks() {
   return (
     <div>
       <Header title="Explore Drinks" />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ () => history.push('/explore/drinks/ingredients') }
-      >
-        By Ingredient
-      </button>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ () => history.push(`/drinks/${randomDrinkId}`) }
-      >
-        Surprise me!
-      </button>
+      <MainConteiner>
+        <Button
+          name="By Ingredient"
+          datatestid="explore-by-ingredient"
+          onClick={ () => history.push('/explore/drinks/ingredients') }
+        />
+
+        <Button
+          name="Surprise me!"
+          data-testid="explore-surprise"
+          onClick={ () => history.push(`/drinks/${randomDrinkId}`) }
+        />
+
+      </MainConteiner>
+
       <Footer />
     </div>
   );

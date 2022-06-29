@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Card from '../components/MainCard';
-import { fetchApi } from '../helpers/API';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import Card from '../../components/MainCard';
+import { fetchApi } from '../../helpers/API';
+import { MainConteiner, Select } from './styles';
 
 export default function ExploreFoodsByNationality() {
   const [nationalities, setNationalities] = useState([]);
@@ -46,29 +47,30 @@ export default function ExploreFoodsByNationality() {
   return (
     <div>
       <Header title="Explore Nationalities" />
-      <select
-        data-testid="explore-by-nationality-dropdown"
-        id="area"
-        onChange={ handleChange }
-      >
-        <option
-          data-testid="All-option"
-          value="All"
+      <MainConteiner>
+        <Select
+          data-testid="explore-by-nationality-dropdown"
+          id="area"
+          onChange={ handleChange }
         >
-          All
-        </option>
-        {nationalities.map(({ strArea }, i) => (
           <option
-            data-testid={ `${strArea}-option` }
-            key={ `${strArea}-${i}` }
-            value={ strArea }
+            data-testid="All-option"
+            value="All"
           >
-            { strArea }
+            All
           </option>
-        ))}
-      </select>
+          {nationalities.map(({ strArea }, i) => (
+            <option
+              data-testid={ `${strArea}-option` }
+              key={ `${strArea}-${i}` }
+              value={ strArea }
+            >
+              { strArea }
+            </option>
+          ))}
+        </Select>
 
-      {areaResult
+        {areaResult
         && areaResult.slice(0, MAX_LIST)
           .map(({ strMeal, strMealThumb, idMeal }, index) => (
             <Card
@@ -80,6 +82,8 @@ export default function ExploreFoodsByNationality() {
               path="foods"
             />
           ))}
+      </MainConteiner>
+
       <Footer />
     </div>
   );

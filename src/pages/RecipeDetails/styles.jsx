@@ -50,8 +50,8 @@ export const Title = styled.h1`
 
 export const ShareAndFavContainer = styled.div`
   display:flex;
-  justify-content:space-around;
-  align-items:center;
+  justify-content:center;
+  margin: 10px;
 `;
 
 export const FoodInstructions = styled.p`
@@ -82,3 +82,8 @@ export const Video = styled.iframe`
   margin-top:44px;
   border-radius:15%;
 `;
+
+// export const ButtonContainer = styled.div`
+//   display: flex;
+//   justify-content:center;
+// `;

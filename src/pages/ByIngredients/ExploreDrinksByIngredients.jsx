@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { Context as RecipeContext } from '../context/Provider';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import { Context as RecipeContext } from '../../context/Provider';
+import Card from '../../components/IngredientsFilter/IngredientsFilter';
+import MainConteiner from './styles';
 
 export default function ExploreDrinksByIngredients() {
   const { setShowSearchButton,
@@ -43,30 +45,18 @@ export default function ExploreDrinksByIngredients() {
   return (
     <div>
       <Header title="Explore Ingredients" />
-      <div>
+      <MainConteiner>
         {ingredients.slice(0, MAX_INGREDIENTS)
           .map(({ strIngredient1 }, index) => (
-            <button
-              data-testid={ `${index}-ingredient-card` }
-              type="button"
-              onClick={ () => handleClick(strIngredient1) }
-              key={ index }
-            >
-              <img
-                src={
-                  `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png`
-                }
-                alt={ strIngredient1 }
-                data-testid={ `${index}-card-img` }
-              />
-              <h4
-                data-testid={ `${index}-card-name` }
-              >
-                { strIngredient1 }
-              </h4>
-            </button>
+            <Card
+              key={ `key-${index}` }
+              index={ index }
+              strIngredient={ strIngredient1 }
+              click={ () => handleClick(strIngredient1) }
+              src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
+            />
           ))}
-      </div>
+      </MainConteiner>
       <Footer />
     </div>
   );
