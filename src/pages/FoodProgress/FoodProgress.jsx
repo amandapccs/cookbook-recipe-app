@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
-import favIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import InProgressIngredients from '../components/InProgressIngredients';
-import { Context as RecipeContext } from '../context/Provider';
+import shareIcon from '../../images/shareIcon.svg';
+import favIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import InProgressIngredients from '../../components/InProgressIngredients';
+import { Context as RecipeContext } from '../../context/Provider';
+import { MainConteiner } from './styles';
 
 export default function FoodProgress() {
   const history = useHistory();
@@ -101,7 +102,7 @@ export default function FoodProgress() {
   };
 
   return (
-    <div>
+    <MainConteiner>
       <h1>Food in Progress</h1>
       <img
         data-testid="recipe-photo"
@@ -147,6 +148,6 @@ export default function FoodProgress() {
       >
         Finish Recipe
       </button>
-    </div>
+    </MainConteiner>
   );
 }

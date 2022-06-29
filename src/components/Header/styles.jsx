@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 const HeaderContainer = styled.div`
-align-items: center;
+  align-items: center;
   background-color: #422800;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height:2.8rem;
 `;
 const HeaderMain = styled.div`
   align-items: center;
@@ -24,6 +25,7 @@ filter:
 `;
 const Title = styled.h2`
   color:#fbeee0;
+  margin: auto;
 `;
 const BtnSearch = styled.button`
   background-color: #fbeee0;
