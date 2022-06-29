@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../../images/shareIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import { RecipeContainer, RecipeImg } from './styles';
 
 function CardFavRecipes({
   image,
@@ -35,59 +36,64 @@ function CardFavRecipes({
   };
 
   return (
-    <div>
+    <RecipeContainer>
       <Link to={ `/${type}s/${id}` }>
-        <img
+        <RecipeImg
           src={ image }
           alt={ name }
           data-testid={ `${index}-horizontal-image` }
           className="recipe-done-image"
         />
-        <h3 data-testid={ `${index}-horizontal-name` }>
-          {name}
-        </h3>
       </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>
-        {type === 'food' ? (
-          `${area} - ${category}`
-        ) : (
-          `${alcoholic}`
-        )}
-      </p>
-      <p data-testid={ `${index}-horizontal-done-date` }>
-        {doneDate}
-      </p>
       <div>
-        {tags && tags.map((tagName) => (
-          <p
-            data-testid={ `${index}-${tagName}-horizontal-tag` }
-            key={ `${tagName}${index}` }
-          >
-            {tagName}
-          </p>
-        ))}
+
+        <Link to={ `/${type}s/${id}` }>
+          <h3 data-testid={ `${index}-horizontal-name` }>
+            {name}
+          </h3>
+        </Link>
+        <p data-testid={ `${index}-horizontal-top-text` }>
+          {type === 'food' ? (
+            `${area} - ${category}`
+          ) : (
+            `${alcoholic}`
+          )}
+        </p>
+        <p data-testid={ `${index}-horizontal-done-date` }>
+          {doneDate}
+        </p>
+        <div>
+          {tags && tags.map((tagName) => (
+            <p
+              data-testid={ `${index}-${tagName}-horizontal-tag` }
+              key={ `${tagName}${index}` }
+            >
+              {tagName}
+            </p>
+          ))}
+        </div>
+        <button
+          data-testid={ `${index}-horizontal-share-btn` }
+          type="button"
+          src="src/images/shareIcon.svg"
+          onClick={ copyToClipboard }
+        >
+          <img src={ shareIcon } alt="share" />
+        </button>
+        <button
+          type="button"
+          className="btn-fav"
+          onClick={ handleFavoriteClick }
+        >
+          <img
+            src={ blackHeartIcon }
+            alt="Fav icon"
+            data-testid={ `${index}-horizontal-favorite-btn` }
+          />
+        </button>
+        { copied && <span>Link copied!</span>}
       </div>
-      <button
-        data-testid={ `${index}-horizontal-share-btn` }
-        type="button"
-        src="src/images/shareIcon.svg"
-        onClick={ copyToClipboard }
-      >
-        <img src={ shareIcon } alt="share" />
-      </button>
-      <button
-        type="button"
-        className="btn-fav"
-        onClick={ handleFavoriteClick }
-      >
-        <img
-          src={ blackHeartIcon }
-          alt="Fav icon"
-          data-testid={ `${index}-horizontal-favorite-btn` }
-        />
-      </button>
-      { copied && <span>Link copied!</span>}
-    </div>
+    </RecipeContainer>
   );
 }
 

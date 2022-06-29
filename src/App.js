@@ -15,7 +15,7 @@ import ExploreDrinksByIngredients from './pages/ByIngredients/ExploreDrinksByIng
 import ExploreFoodsByNationality from './pages/ByNationalities/ExploreFoodsByNationality';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes/DoneRecipes';
-import FavoriteRecipes from './pages/FavoriteRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes/FavoriteRecipes';
 import NotFound from './pages/NotFound';
 
 function App() {
