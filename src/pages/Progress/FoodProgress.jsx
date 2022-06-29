@@ -7,17 +7,16 @@ import InProgressIngredients from '../../components/InProgressIngredients';
 import { Context as RecipeContext } from '../../context/Provider';
 
 import {
-  // RecomendationConteiner,
   MainConteiner,
   FoodImg,
   FoodTitle,
   Title,
-  // ShareAndFavContainer,
   FoodInstructions,
   InstructionsContainer,
   ShareAndFavContainer,
   Buttons,
   LinkCopied,
+  FinishRecipeButton,
 } from './styles';
 
 export default function FoodProgress() {
@@ -156,14 +155,14 @@ export default function FoodProgress() {
         </FoodInstructions>
       </InstructionsContainer>
 
-      <button
+      <FinishRecipeButton
         data-testid="finish-recipe-btn"
         type="button"
         disabled={ isDisabled }
         onClick={ finishRecipe }
       >
         Finish Recipe
-      </button>
+      </FinishRecipeButton>
     </MainConteiner>
   );
 }

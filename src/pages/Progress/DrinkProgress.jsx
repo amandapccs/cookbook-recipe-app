@@ -17,6 +17,7 @@ import {
   ShareAndFavContainer,
   Buttons,
   LinkCopied,
+  FinishRecipeButton,
 } from './styles';
 
 export default function DrinkProgress() {
@@ -150,14 +151,14 @@ export default function DrinkProgress() {
         </FoodInstructions>
       </InstructionsContainer>
 
-      <button
+      <FinishRecipeButton
         data-testid="finish-recipe-btn"
         type="button"
         disabled={ isDisabled }
         onClick={ finishRecipe }
       >
         Finish Recipe
-      </button>
+      </FinishRecipeButton>
     </MainConteiner>
   );
 }
