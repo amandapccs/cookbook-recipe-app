@@ -40,30 +40,48 @@ export const ProfileContainer = styled.div`
 `;
 
 export const Input = styled.input`
-  background-color: #ffffff86;
-  border-radius: 16px;
-  margin: 5px;
-  padding:10px;
-
-  margin: 2px;
-
-  background-color: ${(props) => (props.primary ? '#422800' : '#fbeee0 ')};
-  color: ${(props) => (props.primary ? '#fbeee0' : '#422800 ')};
-  border: 2px solid #422800;
-  border-radius: 30px;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 600;
-  font-size: 12px;
-  padding: 0 18px;
-  line-height: 30px;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
+  display:flex;
+  margin: auto;
+  border: none;
+  color:#422800;
+  border-bottom: 2px solid #422800;
+  background: #ffffff86;
+  border-radius:15px;
+  padding: 10px;
+  padding-left: 24px;
+  font-weight: 700;
+  width: 75%;
+  ::placeholder{
+    color:#422800;
+    background-color:transparent;
+  }
 `;
+
+// export const Input = styled.input`
+//   background-color: #ffffff86;
+//   border-radius: 16px;
+//   margin: 5px;
+//   padding:10px;
+
+//   margin: 2px;
+
+//   background-color: ${(props) => (props.primary ? '#422800' : '#fbeee0 ')};
+//   color: ${(props) => (props.primary ? '#fbeee0' : '#422800 ')};
+//   border: 2px solid #422800;
+//   border-radius: 30px;
+//   cursor: pointer;
+//   display: inline-block;
+//   font-weight: 600;
+//   font-size: 12px;
+//   padding: 0 18px;
+//   line-height: 30px;
+//   text-align: center;
+//   text-decoration: none;
+//   user-select: none;
+//   -webkit-user-select: none;
+//   touch-action: manipulation;
+
+// `;
 
 export const ProfileImgContainer = styled.div`
   width: 200px;

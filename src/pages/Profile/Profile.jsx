@@ -5,6 +5,7 @@ import Footer from '../../components/Footer';
 import { Context } from '../../context/Provider';
 import Button from '../../components/Button/Button';
 import PrizesComponent from './Prizes';
+import profileIcon from '../../images/empregos.png';
 
 import {
   MainConteiner,
@@ -74,7 +75,7 @@ export default function Profile() {
           { readUser && (
             <ProfileImgContainer>
               <ProfileImg
-                src={ readUser.img }
+                src={ !readUser.img ? profileIcon : readUser.img }
                 alt="User Img"
               />
             </ProfileImgContainer>
