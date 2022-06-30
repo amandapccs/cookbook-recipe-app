@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const FooterConteiner = styled.footer`
-  padding: 1.25rem;
   bottom: 0;
   background-color: #422800;
   position: fixed;
@@ -24,5 +23,6 @@ const Img = styled.img`
   hue-rotate(1110deg)
   brightness(100%)
   contrast(90%);
+  padding:6px;
 `;
 export { FooterConteiner, FooterLink, Img };

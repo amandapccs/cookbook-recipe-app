@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { addMealsToken,
   addCocktailsToken,
-  addEmailLocalStorage } from '../helpers/LocalStorage';
-import rockGlass from '../images/rockGlass.svg';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Login.css';
+  addEmailLocalStorage } from '../../helpers/LocalStorage';
+import CookBook from '../../images/CookBook.png';
+import {
+  MainContainer,
+  LogoContainer,
+  LogoImg,
+  FormContainer,
+  InputLogin,
+  ButtonLogin,
+} from './styles';
 
 export default function Login() {
   const history = useHistory();
@@ -58,21 +64,14 @@ export default function Login() {
 
   return (
 
-    <div className="meals">
-      <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-
-      <form className="loginForm">
-        <input
+    <MainContainer className="meals">
+      <LogoContainer>
+        <LogoImg src={ CookBook } alt="CookBookLogo" />
+      </LogoContainer>
+      <FormContainer>
+        <InputLogin
           required
           data-testid="email-input"
-          className="form-control"
           id="email"
           type="email"
           placeholder="Email"
@@ -80,26 +79,24 @@ export default function Login() {
           onChange={ changeInput }
         />
 
-        <input
+        <InputLogin
           required
           data-testid="password-input"
-          className="form-control"
           id="password"
           type="password"
           placeholder="Senha"
           value={ password }
           onChange={ changeInput }
         />
-        <button
+        <ButtonLogin
           data-testid="login-submit-btn"
           type="button"
-          className="btn btn-danger form-control"
           onClick={ onClickButton }
           disabled={ buttonDisabled }
         >
           Enter
-        </button>
-      </form>
-    </div>
+        </ButtonLogin>
+      </FormContainer>
+    </MainContainer>
   );
 }
