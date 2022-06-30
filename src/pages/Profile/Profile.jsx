@@ -71,7 +71,7 @@ export default function Profile() {
       <MainConteiner>
 
         <ProfileContainer>
-          { readUser.img && (
+          { readUser && (
             <ProfileImgContainer>
               <ProfileImg
                 src={ readUser.img }

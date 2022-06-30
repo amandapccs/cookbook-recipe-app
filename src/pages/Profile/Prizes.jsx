@@ -20,7 +20,7 @@ export default function PrizesComponent() {
       message: 'You haven\'t done enough recipes!',
     };
 
-    if (!doneRecipes || doneRecipes.length === 0) {
+    if (!doneRecipes || doneRecipes.length <= thirdPrize) {
       return prize0;
     }
     if (doneRecipes.length >= firstPrize) {
