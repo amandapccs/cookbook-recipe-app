@@ -67,7 +67,7 @@ export const CheckboxSpan = styled.span`
   font-weight: 800;
   font-size: 18px;
   margin-top: -50px;
-  margin-left: 140px;
+  margin-left: 60px;
   display: flex;
   text-align: center;
   align-items: center;
